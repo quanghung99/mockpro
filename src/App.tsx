@@ -1,30 +1,14 @@
-import { authApi, userApi, profilesApi, articlesApi, commentApi } from 'api';
-import {
-	articleModel,
-	articlesFilterd,
-	profileModel,
-	articleSlug,
-	userModel,
-	commentModel,
-	commentList,
-	tagModel,
-} from 'models';
-import React, { useEffect } from 'react';
 import './App.css';
+import Header from './components/common/Header';
+import Footer from './components/common/Footer';
 function App() {
-	useEffect(() => {
-		(async () => {
-			localStorage.setItem(
-				'access_tokenn',
-				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZoYWkxMjNAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ2aGFpMTIzIiwicGFzc3dvcmQiOiIkMmEkMTAkdGMwN1IzeVdYdDB6azVZSjdVQU1uT2h1bWlJSG9qd09vV2FDSC5EUEdHQ3JBSzJpMHMzRlMiLCJiaW8iOm51bGwsImltYWdlIjoiaHR0cHM6Ly9hcGkucmVhbHdvcmxkLmlvL2ltYWdlcy9zbWlsZXktY3lydXMuanBlZyIsImlhdCI6MTY0NjA0MDM2NywiZXhwIjoxNjUxMjI0MzY3fQ.ObExAfzdeXeLqmu7V-M4rWvL6Mrg2gsF8UPzMPRLdcw		'
-			);
-
-			const response: tagModel = await articlesApi.getTag();
-			console.log(response);
-		})();
-	}, []);
-
-	return <div className="App"></div>;
+	return (
+		<div className="App">
+			<Header />
+			<div style={{ height: '100vh' }}></div>
+			<Footer />
+		</div>
+	);
 }
 
 export default App;

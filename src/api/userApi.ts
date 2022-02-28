@@ -10,5 +10,4 @@ export const userApi = {
 		const url = 'user';
 		return axiosCustom.put(url, updateUserData);
 	},
-    
 };

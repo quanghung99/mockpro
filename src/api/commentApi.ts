@@ -10,11 +10,11 @@ export const commentApi = {
 		const url = `/articles/${slug}/comments`;
 		return axiosCustom.get(url);
 	},
-	deleteArticle(
+	deleteComment(
 		slug: string,
 		id: string | number
 	): Promise<commentList<commentModel>> {
-		const url = `/articles/${slug}/comments`;
+		const url = `/articles/${slug}/comments/${id}`;
 		return axiosCustom.delete(url);
 	},
 };

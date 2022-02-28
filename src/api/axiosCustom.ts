@@ -23,7 +23,7 @@ axiosCustom.interceptors.request.use(
 		};
 		return config;
 	},
-	function (error) {
+	function (error: any) {
 		// Do something with request error
 		return Promise.reject(error);
 	}
@@ -36,7 +36,7 @@ axiosCustom.interceptors.response.use(
 		// Do something with response data
 		return response.data;
 	},
-	function (error) {
+	function (error: any) {
 		// Any status codes that falls outside the range of 2xx cause this function to trigger
 		// Do something with response error
 		return Promise.reject(error);

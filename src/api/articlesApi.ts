@@ -1,42 +1,49 @@
-import { articleModel, articleParam, articleList } from 'models/article';
+import {
+	articleModel,
+	articleParamCreate,
+	articleParamUpdate,
+	articlesFilterd,
+	articleList,
+	articleSlug,
+} from 'models/article';
 import { tagModel } from 'models/tag';
 import axiosCustom from './axiosCustom';
 
 export const articlesApi = {
-	getListArticles(): Promise<articleList<articleModel>> {
-		const url = '/articles';
+	getListArticles(filter: string): Promise<articlesFilterd> {
+		const url = `/articles${filter}`;
 		return axiosCustom.get(url);
 	},
-	getFeedArticles(): Promise<articleList<articleModel>> {
-		const url = '/articles/feed';
+	getFeedArticles(filter: string): Promise<articlesFilterd> {
+		const url = `/articles/feed${filter}`;
 		return axiosCustom.get(url);
 	},
-	getArticle(slug: string): Promise<articleList<articleModel>> {
-		const url = `/api/articles/${slug}`;
+	getArticle(slug: string): Promise<articleSlug> {
+		const url = `/articles/${slug}`;
 		return axiosCustom.get(url);
 	},
-	addArticle(articleData: articleParam): Promise<articleList<articleModel>> {
+	addArticle(articleData: articleParamCreate): Promise<articleModel> {
 		const url = '/articles';
 		return axiosCustom.post(url, articleData);
 	},
 	updateArticle(
-		articleData: articleParam,
+		articleData: articleParamUpdate,
 		slug: string
-	): Promise<articleList<articleModel>> {
+	): Promise<articleModel> {
 		const url = `/articles/${slug}`;
-		return axiosCustom.post(url, articleData);
+		return axiosCustom.put(url, articleData);
 	},
-	deleteArticle(slug: string): Promise<articleList<articleModel>> {
-		const url = `/api/articles/${slug}`;
+	deleteArticle(slug: string): Promise<articleModel> {
+		const url = `/articles/${slug}`;
 		return axiosCustom.delete(url);
 	},
 	favoriteArticle(slug: string): Promise<articleModel> {
-		const url = `/api/articles/${slug}/favorite`;
+		const url = `/articles/${slug}/favorite`;
 		return axiosCustom.post(url);
 	},
 
 	unfavoriteArticle(slug: string): Promise<articleModel> {
-		const url = `/api/articles/${slug}/favorite`;
+		const url = `/articles/${slug}/favorite`;
 		return axiosCustom.delete(url);
 	},
 	getTag(): Promise<tagModel> {

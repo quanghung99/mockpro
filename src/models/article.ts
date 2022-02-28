@@ -15,16 +15,29 @@ export interface articleModel {
 	favoritesCount: number;
 	favorited: boolean;
 }
-
+export interface articlesFilterd {
+	articles: articleModel[];
+	articlesCount: number;
+}
+export interface articleSlug {
+	article: articleModel;
+}
 export interface articleList<T> {
 	articles: Array<T>;
 }
 
-export interface articleParam {
+export interface articleParamCreate {
 	article: {
 		title: string;
 		description: string;
 		body: string;
-		tagList: Array<string>;
+		tagList?: Array<string>;
+	};
+}
+export interface articleParamUpdate {
+	article: {
+		title?: string;
+		description?: string;
+		body?: string;
 	};
 }

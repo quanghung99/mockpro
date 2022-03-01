@@ -2,19 +2,22 @@ import {
 	articleModel,
 	articleParamCreate,
 	articleParamUpdate,
-	articlesFilterd,
+	articlesResponse,
 	articleList,
 	articleSlug,
+	articleFilter,
 } from 'models/article';
 import { tagModel } from 'models/tag';
+import { stringify } from 'query-string';
 import axiosCustom from './axiosCustom';
 
 export const articlesApi = {
-	getListArticles(filter: string): Promise<articlesFilterd> {
-		const url = `/articles${filter}`;
+	getListArticles(filter: articleFilter): Promise<articlesResponse> {
+		const filterString = stringify(filter);
+		const url = `/articles?${filterString}`;
 		return axiosCustom.get(url);
 	},
-	getFeedArticles(filter: string): Promise<articlesFilterd> {
+	getFeedArticles(filter: articleFilter): Promise<articlesResponse> {
 		const url = `/articles/feed${filter}`;
 		return axiosCustom.get(url);
 	},

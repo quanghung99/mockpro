@@ -15,7 +15,7 @@ export interface articleModel {
 	favoritesCount: number;
 	favorited: boolean;
 }
-export interface articlesFilterd {
+export interface articlesResponse {
 	articles: articleModel[];
 	articlesCount: number;
 }
@@ -40,4 +40,12 @@ export interface articleParamUpdate {
 		description?: string;
 		body?: string;
 	};
+}
+
+export interface articleFilter {
+	tag?: string;
+	author?: string;
+	favorited?: string;
+	limit?: number;
+	offset?: number;
 }

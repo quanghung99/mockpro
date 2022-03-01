@@ -11,12 +11,20 @@ import { Backdrop, CircularProgress } from '@mui/material';
 import { useEffect } from 'react';
 import { authAction } from 'features/auth/authSlice';
 import { WithAuth } from 'utils/authGuard';
+import { articleAction } from 'features/articles/articleSlice';
+import Article from 'features/articles/Article';
 
 function App() {
 	const isLogging = useAppSelector((state) => state.auth.isLogging);
 	const dispatch = useAppDispatch();
 	useEffect(() => {
 		dispatch(authAction.getCurrentUser());
+		dispatch(
+			articleAction.getListArticle({
+				limit: 10,
+				offset: 0,
+			})
+		);
 	}, [dispatch]);
 	return (
 		<div className="App">
@@ -24,6 +32,7 @@ function App() {
 			<Switch>
 				<Route component={WithAuth(LoginPage)} path="/login" />
 				<Route component={SignUpPage} path="/register" />
+				<Route path="/blog" component={Article} />
 			</Switch>
 			<Footer />
 			<ToastContainer

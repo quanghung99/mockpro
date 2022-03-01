@@ -30,7 +30,6 @@ export default function TextAreaField({
 				onChange={onChange}
 				value={value}
 				minRows={10}
-				// aria-label="minimum height"
 				placeholder={inputProps.placeholder}
 				style={{
 					boxSizing: 'border-box',

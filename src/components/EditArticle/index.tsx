@@ -4,25 +4,34 @@ import TextAreaField from 'components/common/CustomField/TextAreaField';
 import { articleParamCreate } from 'models';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
+const schema = yup.object({
+	title: yup.string().required('Please enter the title'),
+	description: yup.string().required('Please enter description'),
+	body: yup.string().required('Please enter the body'),
+	tagList: yup.string().required('Please enter tag'),
+});
 export default function EditArticlePage() {
-	const { control, handleSubmit } = useForm({
+	const {
+		control,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({
 		defaultValues: {
 			title: '',
 			description: '',
 			body: '',
 			tagList: '',
 		},
+		resolver: yupResolver(schema),
 	});
 	const onsubmit = (value: any) => {
 		console.log(value);
 	};
 	return (
 		<Container maxWidth="md">
-			<Typography variant="h1" component="h2">
-				Edit your article
-			</Typography>
-
 			<form onSubmit={handleSubmit(onsubmit)}>
 				<div>
 					<InputField
@@ -46,6 +55,17 @@ export default function EditArticlePage() {
 						label=""
 						placeholder="Write your article "
 					></TextAreaField>
+					<Typography
+						sx={{
+							textAlign: 'left',
+							padding: '0 12px',
+							fontSize: '12px',
+							color: '#d32f2f',
+						}}
+						component={'div'}
+					>
+						{errors.body?.message}
+					</Typography>
 					<InputField
 						control={control}
 						name="tagList"

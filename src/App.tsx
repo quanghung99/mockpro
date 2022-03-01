@@ -3,11 +3,12 @@ import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import SignUpPage from 'components/SignUp';
 import EditArticlePage from 'components/EditArticle';
+import LoginPage from 'components/LogIn';
 function App() {
 	return (
 		<div className="App">
 			<Header />
-			<EditArticlePage></EditArticlePage>
+			<LoginPage></LoginPage>
 			<Footer />
 		</div>
 	);

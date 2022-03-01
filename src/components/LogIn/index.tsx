@@ -4,14 +4,33 @@ import InputField from 'components/common/CustomField/InputField';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+const schema = yup
+	.object({
+		email: yup
+			.string()
+			.email('Must be a valid email')
+			.max(255)
+			.required('Email is required'),
+		password: yup.string().max(255).required('Password is required'),
+	})
+	.required();
+
 export interface LoginPageProps {}
 
 export default function LoginPage(props: LoginPageProps) {
-	const { control, handleSubmit } = useForm({
+	const {
+		control,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({
 		defaultValues: {
 			email: '',
 			password: '',
 		},
+		resolver: yupResolver(schema),
 	});
 	const onsubmit = (value: any) => {
 		console.log(value);

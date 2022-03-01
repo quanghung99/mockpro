@@ -1,9 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-
-const checkToken = (): string => {
-	const token = localStorage.getItem('access_tokenn');
-	return token ? token : '';
-};
+import { checkToken } from 'utils/checkToken';
 
 const axiosCustom = axios.create({
 	headers: {
@@ -15,11 +11,13 @@ const axiosCustom = axios.create({
 // Add a request interceptor
 axiosCustom.interceptors.request.use(
 	function (config: AxiosRequestConfig) {
+		// check token
+		let accesstoken = checkToken();
 		// Do something before request is sent
-		const token = checkToken();
+		// const token = checkToken();
 		config.headers = {
 			'Content-Type': 'application/json',
-			Authorization: `Bearer ${token}`,
+			Authorization: `Bearer ${accesstoken}`,
 		};
 		return config;
 	},

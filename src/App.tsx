@@ -1,11 +1,27 @@
 import './App.css';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
+import { useEffect } from 'react';
+import { useAppDispatch } from 'app/hooks';
+import { articleAction } from 'features/articles/articleSlice';
+import Article from 'features/articles/Article';
+import { Switch, Route } from 'react-router-dom';
 function App() {
+	const dispatch = useAppDispatch();
+	useEffect(() => {
+		dispatch(
+			articleAction.getListArticle({
+				limit: 10,
+				offset: 0,
+			})
+		);
+	}, [dispatch]);
 	return (
 		<div className="App">
 			<Header />
-			<div style={{ height: '100vh' }}></div>
+			<Switch>
+				<Route path="/blog" component={Article} />
+			</Switch>
 			<Footer />
 		</div>
 	);

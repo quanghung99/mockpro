@@ -1,11 +1,13 @@
 import './App.css';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
+import SignUpPage from 'components/SignUp';
+import EditArticlePage from 'components/EditArticle';
 function App() {
 	return (
 		<div className="App">
 			<Header />
-			<div style={{ height: '100vh' }}></div>
+			<EditArticlePage></EditArticlePage>
 			<Footer />
 		</div>
 	);

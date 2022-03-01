@@ -1,8 +1,8 @@
-import { TextField } from '@mui/material';
+import { TextareaAutosize, TextField } from '@mui/material';
 import * as React from 'react';
 import { Control, useController } from 'react-hook-form';
 
-export interface InputFieldProps
+export interface TextAreaFieldProps
 	extends React.InputHTMLAttributes<HTMLInputElement> {
 	control: Control<any>;
 	name: string;
@@ -10,12 +10,12 @@ export interface InputFieldProps
 	placeholder?: string;
 }
 
-export default function InputField({
+export default function TextAreaField({
 	control,
 	name,
 	label,
 	...inputProps
-}: InputFieldProps) {
+}: TextAreaFieldProps) {
 	const {
 		field: { onBlur, onChange, value, ref },
 		fieldState: { error, invalid },
@@ -24,21 +24,23 @@ export default function InputField({
 		control: control,
 	});
 	return (
-		<>
-			<TextField
-				fullWidth
+		<div>
+			<TextareaAutosize
 				onBlur={onBlur}
 				onChange={onChange}
 				value={value}
-				label={label}
-				inputRef={ref}
-				error={invalid}
-				helperText={error?.message}
-				variant="outlined"
-				inputProps={inputProps}
-				margin={'normal'}
+				minRows={10}
+				// aria-label="minimum height"
 				placeholder={inputProps.placeholder}
+				style={{
+					boxSizing: 'border-box',
+					width: '100%',
+					borderRadius: '10px',
+					padding: '16px 14px',
+					fontSize: '16px',
+					outlineColor: '#66afe9',
+				}}
 			/>
-		</>
+		</div>
 	);
 }

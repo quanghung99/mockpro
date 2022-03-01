@@ -1,9 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-
-const checkToken = (): string => {
-	const token = localStorage.getItem('access_tokenn');
-	return token ? token : '';
-};
+import { checkToken } from 'utils/checkToken';
 
 const axiosCustom = axios.create({
 	headers: {

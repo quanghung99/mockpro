@@ -1,12 +1,11 @@
-import { Button, Container, Paper, Typography } from '@mui/material';
+// import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Button, Container, Typography } from '@mui/material';
 import InputField from 'components/common/CustomField/InputField';
 import TextAreaField from 'components/common/CustomField/TextAreaField';
-import { articleParamCreate } from 'models';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
 const schema = yup.object({
 	title: yup.string().required('Please enter the title'),
 	description: yup.string().required('Please enter description'),

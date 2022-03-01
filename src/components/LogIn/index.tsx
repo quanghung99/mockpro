@@ -1,11 +1,17 @@
 import { Lock } from '@mui/icons-material';
 import { Button, Container, Paper, Typography } from '@mui/material';
+import { useAppDispatch } from 'app/hooks';
 import InputField from 'components/common/CustomField/InputField';
+import { authAction } from 'features/auth/authSlice';
+import { loginData } from 'models';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 export interface LoginPageProps {}
-
+interface formState {
+	email: string;
+	password: string;
+}
 export default function LoginPage(props: LoginPageProps) {
 	const { control, handleSubmit } = useForm({
 		defaultValues: {
@@ -13,11 +19,18 @@ export default function LoginPage(props: LoginPageProps) {
 			password: '',
 		},
 	});
-	const onsubmit = (value: any) => {
-		console.log(value);
+	const dispatch = useAppDispatch();
+	const onsubmit = (value: formState) => {
+		const formLogin: loginData = {
+			user: {
+				email: value.email,
+				password: value.password,
+			},
+		};
+		dispatch(authAction.login(formLogin));
 	};
 	return (
-		<Container maxWidth={'lg'}>
+		<Container maxWidth={'lg'} sx={{ my: '50px' }}>
 			<Paper
 				elevation={5}
 				sx={{

@@ -86,10 +86,20 @@ const Header = () => {
 											open={Boolean(anchorEl)}
 											onClose={handleClose}
 										>
-											<MenuItem onClick={() => navigate.push('/setting')}>
+											<MenuItem
+												onClick={() => {
+													navigate.push('/setting');
+													handleClose();
+												}}
+											>
 												Setting
 											</MenuItem>
-											<MenuItem onClick={() => navigate.push('/profile')}>
+											<MenuItem
+												onClick={() => {
+													navigate.push('/profile');
+													handleClose();
+												}}
+											>
 												Profile
 											</MenuItem>
 											<MenuItem onClick={handleSignOut}>Sign Out</MenuItem>

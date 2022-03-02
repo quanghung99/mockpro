@@ -1,11 +1,10 @@
 import {
+	articleFilter,
 	articleModel,
 	articleParamCreate,
 	articleParamUpdate,
-	articlesResponse,
-	articleList,
 	articleSlug,
-	articleFilter,
+	articlesResponse,
 } from 'models/article';
 import { tagModel } from 'models/tag';
 import { stringify } from 'query-string';

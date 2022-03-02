@@ -1,17 +1,15 @@
 import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { useAppSelector } from 'app/hooks';
-import { selectArticleList } from 'features/articles/articleSlice';
 import { articleModel } from 'models';
-import styles from './styles.module.scss';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import styles from './styles.module.scss';
 
-export interface IArticleListProps {}
+export interface IArticleListProps {
+	articleList: articleModel[];
+}
 
-export default function ArticleList(props: IArticleListProps) {
-	const articleList = useAppSelector(selectArticleList);
-
+export default function ArticleList({ articleList }: IArticleListProps) {
 	return (
 		<div className={styles.articleList}>
 			<Typography variant="h5" sx={{ fontWeight: 'bold' }} textAlign="left">

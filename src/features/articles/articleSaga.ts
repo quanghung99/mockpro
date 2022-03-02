@@ -6,10 +6,10 @@ import { articleAction } from './articleSlice';
 
 function* fetchAllArticle(action: PayloadAction<articleFilter>) {
 	try {
-		const res: articlesResponse = yield call(
-			articlesApi.getListArticles,
-			action.payload
-		);
+		const res: articlesResponse = yield call(articlesApi.getListArticles, {
+			limit: 10,
+			offset: 0,
+		});
 		yield put(articleAction.setListArticle(res.articles));
 	} catch (error) {}
 }

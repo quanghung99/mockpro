@@ -43,6 +43,10 @@ const authSlice = createSlice({
 		signUp(state, action: PayloadAction<signUpData>) {
 			state.isLogging = true;
 		},
+		signOut(state) {
+			state.isLogged = false;
+			state.userState = initialState.userState;
+		},
 	},
 });
 

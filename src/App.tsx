@@ -19,12 +19,7 @@ function App() {
 	const dispatch = useAppDispatch();
 	useEffect(() => {
 		dispatch(authAction.getCurrentUser());
-		dispatch(
-			articleAction.getListArticle({
-				limit: 10,
-				offset: 0,
-			})
-		);
+		dispatch(articleAction.getListArticle());
 	}, [dispatch]);
 	return (
 		<div className="App">

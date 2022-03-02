@@ -4,6 +4,7 @@ import { articleFilter, articleModel } from 'models';
 
 interface State {
 	articles: articleModel[];
+	filer: articleFilter;
 	isLoading: boolean;
 	error: string;
 }
@@ -12,18 +13,25 @@ const initialState: State = {
 	articles: [],
 	isLoading: true,
 	error: '',
+	filer: {
+		limit: 10,
+		offset: 0,
+	},
 };
 
 const articleSlice = createSlice({
 	name: 'article',
 	initialState,
 	reducers: {
-		getListArticle: (state, action: PayloadAction<articleFilter>) => {
+		getListArticle: (state) => {
 			state.isLoading = true;
 		},
 		setListArticle: (state, action: PayloadAction<articleModel[]>) => {
 			state.articles = action.payload;
 			state.isLoading = false;
+		},
+		changeFilter: (state, action: PayloadAction<articleFilter>) => {
+			state.filer = action.payload;
 		},
 	},
 });

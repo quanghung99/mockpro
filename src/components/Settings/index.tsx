@@ -145,6 +145,9 @@ export default function Settings(props: ISettingsProps) {
 							</div>
 						</div>
 					</form>
+					<div className={styles.settingSection__saveBtn}>
+						<Button>Save Profile Information</Button>
+					</div>
 				</Grid>
 			</Grid>
 		</Container>

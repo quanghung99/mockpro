@@ -1,24 +1,29 @@
 header {
   height: 56px;
-  .navbar {
+  width: 100%;
+  @media screen and (max-width: 450px) {
+    height: auto;
+  }
+  nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-  nav {
     ul {
       padding: 5px 0;
       margin: 0;
       display: flex;
       list-style: none;
       align-items: center;
+      li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
       p {
         color: black;
         padding: 10px;
         font-weight: 700 !important;
         cursor: pointer;
-        &:hover {
-        }
         a {
           text-decoration: none;
           color: inherit;
@@ -32,6 +37,13 @@ header {
         justify-content: center;
         align-items: center;
       }
+      .menuIcon {
+        display: none;
+        margin-right: 12px;
+        @media screen and (max-width: 450px) {
+          display: block;
+        }
+      }
       .sectionSection {
         position: relative;
         font-size: 1rem;
@@ -39,6 +51,9 @@ header {
         margin: 0 1rem;
         display: flex;
         align-items: center;
+        @media screen and (max-width: 450px) {
+          display: none;
+        }
         input {
           width: 100%;
           line-height: 1.5;
@@ -46,6 +61,9 @@ header {
           border: 1px solid rgb(212, 212, 212);
           border-radius: 0.375rem;
           font-size: inherit;
+          @media screen and (max-width: 450px) {
+            display: none;
+          }
         }
         svg {
           position: absolute;
@@ -55,6 +73,9 @@ header {
           bottom: 1px !important;
           padding: 0.5rem;
           font-size: 1.9rem;
+          @media screen and (max-width: 450px) {
+            display: none;
+          }
         }
       }
     }
@@ -75,10 +96,20 @@ header {
         color: rgb(59, 73, 233);
         padding: calc(var(0.5rem) - var(1px)) calc(var(1rem) - var(1px));
         margin-right: 10px;
+        @media screen and (max-width: 450px) {
+          display: none;
+        }
       }
       svg {
         font-size: 1.9rem;
         margin: 0 10px;
+        &:nth-child(2) {
+          display: none;
+        }
+        @media screen and (max-width: 450px) {
+          display: block !important;
+          margin: 0 0.25rem;
+        }
       }
     }
   }

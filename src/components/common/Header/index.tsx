@@ -17,14 +17,21 @@ import Logo from './../../../asset/Img/Logo.png';
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './styles.module.scss';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import MenuIcon from '@mui/icons-material/Menu';
+import MenuSidebar from '../MenuSidebar';
 
 const Header = () => {
 	const auth = useAppSelector((state) => state.auth);
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+	const [toggleShow, setToggleShow] = useState<boolean>(false);
 	const dispatch = useAppDispatch();
 	const navigate = useHistory();
 	const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);
+	};
+
+	const handleShowSidebar = () => {
+		setToggleShow(!toggleShow);
 	};
 
 	const handleClose = () => {
@@ -46,20 +53,20 @@ const Header = () => {
 					<nav>
 						<ul>
 							<li>
+								<MenuIcon
+									className={styles.menuIcon}
+									onClick={handleShowSidebar}
+								/>
 								<NavLink to="/blog">
 									<img src={Logo} />
 								</NavLink>
 							</li>
-							<li>
-								<div className={styles.sectionSection}>
-									<input name="search" placeholder="Search..." />
-									<SearchIcon />
-								</div>
+							<li className={styles.sectionSection}>
+								<input name="search" placeholder="Search..." />
+								<SearchIcon />
 							</li>
 						</ul>
-					</nav>
-					<nav className={styles.navbarLeft}>
-						<ul>
+						<ul className={styles.navbarLeft}>
 							{auth.isLogged ? (
 								<li>
 									<div className={styles.navbarLeft_section}>
@@ -69,6 +76,7 @@ const Header = () => {
 										>
 											Create Post
 										</Button>
+										<SearchIcon />
 										<NotificationsNoneIcon />
 										<IconButton
 											size="small"

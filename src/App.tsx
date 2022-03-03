@@ -1,6 +1,7 @@
 import { Backdrop, CircularProgress } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import LoginPage from 'components/LogIn';
+import Settings from 'components/Settings';
 import SignUpPage from 'components/SignUp';
 import Article from 'features/articles/Article';
 import { authAction } from 'features/auth/authSlice';
@@ -27,6 +28,7 @@ function App() {
 				<Route component={WithAuth(LoginPage)} path="/login" />
 				<Route component={SignUpPage} path="/register" />
 				<Route path="/blog" component={Article} />
+				<Route path="/setting" component={Settings} />
 			</Switch>
 			<Footer />
 			<ToastContainer

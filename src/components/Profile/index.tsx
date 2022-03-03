@@ -6,13 +6,11 @@ import { Avatar, Box, Button, Grid, Paper, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
 	articleAction,
-	selectArticleFilter,
 	selectArticleList,
 } from 'features/articles/articleSlice';
 import {
 	profileActions,
 	selectProfileCurrent,
-	selectProfileLoading,
 } from 'features/profile/profileSlice';
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -22,12 +20,9 @@ export interface ProfileProps {}
 
 export default function Profile(props: ProfileProps) {
 	const dispatch = useAppDispatch();
-	// const profileLoading = useAppSelector(selectProfileLoading);
 	const profileCurrent = useAppSelector(selectProfileCurrent);
 	const articleByUser = useAppSelector(selectArticleList);
-	// const filter = useAppSelector(selectArticleFilter);
 	const location = useLocation();
-	const date = new Date();
 	const username = location.pathname.split('/')[2];
 	useEffect(() => {
 		dispatch(profileActions.fetchProfile(username));
@@ -97,7 +92,7 @@ export default function Profile(props: ProfileProps) {
 				<Grid item lg={8}>
 					<Box>
 						<Paper>
-							<Box>
+							<Box className={style.userInfo}>
 								<Avatar
 									// className={}
 									sx={{ width: '32px', height: '32px' }}
@@ -106,6 +101,7 @@ export default function Profile(props: ProfileProps) {
 								<Typography>quanghoapq1</Typography>
 								<Typography>{articleByUser[0]?.createdAt}</Typography>
 							</Box>
+							<Box className={style.userArticle}></Box>
 						</Paper>
 					</Box>
 				</Grid>

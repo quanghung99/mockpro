@@ -30,8 +30,14 @@ const Header = () => {
 		localStorage.removeItem('access_token');
 		handleClose();
 		dispatch(authAction.signOut());
-		dispatch(articleAction.getListArticle());
+		dispatch(
+			articleAction.getListArticle({
+				limit: 10,
+				offset: 0,
+			})
+		);
 	};
+
 	return (
 		<AppBar
 			position="sticky"
@@ -96,7 +102,9 @@ const Header = () => {
 											</MenuItem>
 											<MenuItem
 												onClick={() => {
-													navigate.push('/profile');
+													navigate.push(
+														`/profile/${auth.userState.user.username}`
+													);
 													handleClose();
 												}}
 											>

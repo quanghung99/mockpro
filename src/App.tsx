@@ -13,13 +13,19 @@ import { authAction } from 'features/auth/authSlice';
 import { WithAuth } from 'utils/authGuard';
 import { articleAction } from 'features/articles/articleSlice';
 import Article from 'features/articles/Article';
+import Profile from 'components/Profile';
 
 function App() {
 	const isLogging = useAppSelector((state) => state.auth.isLogging);
 	const dispatch = useAppDispatch();
 	useEffect(() => {
 		dispatch(authAction.getCurrentUser());
-		dispatch(articleAction.getListArticle());
+		dispatch(
+			articleAction.getListArticle({
+				limit: 10,
+				offset: 0,
+			})
+		);
 	}, [dispatch]);
 	return (
 		<div className="App">
@@ -28,6 +34,9 @@ function App() {
 				<Route component={WithAuth(LoginPage)} path="/login" />
 				<Route component={SignUpPage} path="/register" />
 				<Route path="/blog" component={Article} />
+				<Route path="/profile">
+					<Profile />
+				</Route>
 			</Switch>
 			<Footer />
 			<ToastContainer

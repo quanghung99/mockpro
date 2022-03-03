@@ -8,6 +8,8 @@ import {
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import articleReducer from 'features/articles/articleSlice';
 import authReducer from 'features/auth/authSlice';
+import commentReducer from 'features/comment/commentSlice';
+import profileReducer from 'features/profile/profileSlice';
 import { history } from 'utils/history';
 import rootSaga from './rootSaga';
 
@@ -17,6 +19,8 @@ const rootReducer = combineReducers({
 	router: connectRouter(history),
 	auth: authReducer,
 	article: articleReducer,
+	profile: profileReducer,
+	comment: commentReducer,
 });
 
 export const store = configureStore({

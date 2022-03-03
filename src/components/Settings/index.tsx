@@ -1,13 +1,12 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Container, Grid, Typography } from '@mui/material';
 import { userApi } from 'api';
 import InputField from 'components/common/CustomField/InputField';
+import TextAreaField from 'components/common/CustomField/TextAreaField';
 import { userModel } from 'models';
 import * as React from 'react';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import TextAreaField from 'components/common/CustomField/TextAreaField';
-import styles from './styles.module.scss';
 import Corporation from '../../asset/SettingsIcon/corporation.png';
 import CreditCard from '../../asset/SettingsIcon/credit-card.png';
 import MailBox from '../../asset/SettingsIcon/mailbox.png';
@@ -15,7 +14,7 @@ import Plant from '../../asset/SettingsIcon/plant.png';
 import SettingsIcon from '../../asset/SettingsIcon/settings.png';
 import SmilingFace from '../../asset/SettingsIcon/smiling-face.png';
 import Thunderbolt from '../../asset/SettingsIcon/thunderbolt.png';
-import Twitter from '../../asset/SettingsIcon/twitter.png';
+import styles from './styles.module.scss';
 
 const schema = yup.object({
 	imgUrl: yup.string(),

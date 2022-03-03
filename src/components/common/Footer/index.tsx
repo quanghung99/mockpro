@@ -1,7 +1,6 @@
-import { Container, Grid, Typography } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './styles.scss';
 
 const Footer = () => {

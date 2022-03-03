@@ -1,12 +1,15 @@
+import MenuIcon from '@mui/icons-material/Menu';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import SearchIcon from '@mui/icons-material/Search';
 import {
 	AppBar,
 	Avatar,
+	Button,
 	Container,
 	IconButton,
 	Menu,
 	MenuItem,
 	Typography,
-	Button,
 } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { articleAction } from 'features/articles/articleSlice';
@@ -14,11 +17,7 @@ import { authAction } from 'features/auth/authSlice';
 import { useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import Logo from './../../../asset/Img/Logo.png';
-import SearchIcon from '@mui/icons-material/Search';
 import styles from './styles.module.scss';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import MenuIcon from '@mui/icons-material/Menu';
-import MenuSidebar from '../MenuSidebar';
 
 const Header = () => {
 	const auth = useAppSelector((state) => state.auth);
@@ -59,7 +58,7 @@ const Header = () => {
 									onClick={handleShowSidebar}
 								/>
 								<NavLink to="/blog">
-									<img src={Logo} />
+									<img src={Logo} alt="" />
 								</NavLink>
 							</li>
 							<li className={styles.sectionSection}>

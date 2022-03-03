@@ -1,10 +1,4 @@
 import {
-	Home,
-	LibraryBooks,
-	MailOutline,
-	Summarize,
-} from '@mui/icons-material';
-import {
 	Container,
 	Grid,
 	List,
@@ -20,6 +14,7 @@ import { Box } from '@mui/system';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import ArticleFilter from 'components/Aritcle/ArticleFilter';
 import ArticleList from 'components/Aritcle/ArticleList';
+import MenuSidebar from 'components/common/MenuSidebar';
 import { articleFilter } from 'models';
 import React, { useEffect, useState } from 'react';
 import {
@@ -72,75 +67,10 @@ const Article = () => {
 	return (
 		<Container maxWidth={'lg'} sx={{ mt: '40px' }}>
 			<Grid container spacing={2}>
-				<Grid item lg={2} xs={12}>
-					<List>
-						<ListItem disablePadding>
-							<ListItemButton>
-								<ListItemIcon>
-									<img src="/assets/001-house.png" alt="" />
-								</ListItemIcon>
-								<ListItemText primary="Home" />
-							</ListItemButton>
-						</ListItem>
-						<ListItem disablePadding>
-							<ListItemButton>
-								<ListItemIcon>
-									<img src="/assets/002-open-book.png" alt="" />
-								</ListItemIcon>
-								<ListItemText primary="Reading List" />
-							</ListItemButton>
-						</ListItem>
-						<ListItem disablePadding>
-							<ListItemButton>
-								<ListItemIcon>
-									<img src="/assets/003-checklist.png" alt="" />
-								</ListItemIcon>
-								<ListItemText primary="Listing" />
-							</ListItemButton>
-						</ListItem>
-						<ListItem disablePadding>
-							<ListItemButton>
-								<ListItemIcon>
-									<img src="/assets/004-headphone.png" alt="" />
-								</ListItemIcon>
-								<ListItemText primary="Postcasts" />
-							</ListItemButton>
-						</ListItem>
-						<ListItem disablePadding>
-							<ListItemButton>
-								<ListItemIcon>
-									<img src="/assets/005-video-player.png" alt="" />
-								</ListItemIcon>
-								<ListItemText primary="Video" />
-							</ListItemButton>
-						</ListItem>
-						<ListItem disablePadding>
-							<ListItemButton>
-								<ListItemIcon>
-									<img src="/assets/006-tag.png" alt="" />
-								</ListItemIcon>
-								<ListItemText primary="Tags" />
-							</ListItemButton>
-						</ListItem>
-						<ListItem disablePadding>
-							<ListItemButton>
-								<ListItemIcon>
-									<img src="/assets/007-light-bulb.png" alt="" />
-								</ListItemIcon>
-								<ListItemText primary="FAQ" />
-							</ListItemButton>
-						</ListItem>
-						<ListItem disablePadding>
-							<ListItemButton>
-								<ListItemIcon>
-									<img src="/assets/008-about.png" alt="" />
-								</ListItemIcon>
-								<ListItemText primary="About" />
-							</ListItemButton>
-						</ListItem>
-					</List>
+				<Grid item md={3} lg={2} sx={{ display: { xs: 'none', md: 'block' } }}>
+					<MenuSidebar />
 				</Grid>
-				<Grid item lg={8} xs={12}>
+				<Grid item md={9} lg={8} xs={12}>
 					<Box sx={{ borderBottom: 1, borderColor: '#e7ebf0' }}>
 						<Tabs
 							value={tagValue}
@@ -175,7 +105,13 @@ const Article = () => {
 						<ArticleList articleList={articleList} />
 					)}
 				</Grid>
-				<Grid item lg={2} xs={12}>
+				<Grid
+					item
+					md={2}
+					lg={2}
+					xs={12}
+					sx={{ display: { xs: 'none', md: 'none', lg: 'block' } }}
+				>
 					{hashTag?.length ? (
 						<ArticleFilter tags={hashTag} clickTag={handleClickTag} />
 					) : (

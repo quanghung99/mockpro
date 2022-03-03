@@ -6,6 +6,7 @@ import {
 	Avatar,
 	Button,
 	Container,
+	Drawer,
 	IconButton,
 	Menu,
 	MenuItem,
@@ -16,6 +17,7 @@ import { articleAction } from 'features/articles/articleSlice';
 import { authAction } from 'features/auth/authSlice';
 import { useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
+import MenuSidebar from '../MenuSidebar';
 import Logo from './../../../asset/Img/Logo.png';
 import styles from './styles.module.scss';
 
@@ -31,7 +33,7 @@ const Header = () => {
 	};
 
 	const handleShowSidebar = () => {
-		setToggleShow(!toggleShow);
+		setToggleShow(true);
 	};
 
 	const handleClose = () => {
@@ -57,6 +59,13 @@ const Header = () => {
 									className={styles.menuIcon}
 									onClick={handleShowSidebar}
 								/>
+								<Drawer
+									anchor={'left'}
+									open={toggleShow}
+									onClose={() => setToggleShow(false)}
+								>
+									<MenuSidebar />
+								</Drawer>
 								<NavLink to="/blog">
 									<img src={Logo} alt="" />
 								</NavLink>

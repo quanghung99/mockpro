@@ -1,7 +1,7 @@
 header {
 	height: 56px;
 	width: 100%;
-	@media screen and (max-width: 800px) {
+	@media screen and (max-width: 900px) {
 		height: auto;
 	}
 	nav {
@@ -40,7 +40,8 @@ header {
 			.menuIcon {
 				display: none;
 				margin-right: 12px;
-				@media screen and (max-width: 800px) {
+				cursor: pointer;
+				@media screen and (max-width: 900px) {
 					display: block;
 				}
 			}
@@ -51,7 +52,7 @@ header {
 				margin: 0 1rem;
 				display: flex;
 				align-items: center;
-				@media screen and (max-width: 800px) {
+				@media screen and (max-width: 900px) {
 					display: none;
 				}
 				input {
@@ -61,7 +62,7 @@ header {
 					border: 1px solid rgb(212, 212, 212);
 					border-radius: 0.375rem;
 					font-size: inherit;
-					@media screen and (max-width: 800px) {
+					@media screen and (max-width: 900px) {
 						display: none;
 					}
 				}
@@ -73,7 +74,7 @@ header {
 					bottom: 1px !important;
 					padding: 0.5rem;
 					font-size: 1.9rem;
-					@media screen and (max-width: 800px) {
+					@media screen and (max-width: 900px) {
 						display: none;
 					}
 				}
@@ -96,7 +97,7 @@ header {
 				color: rgb(59, 73, 233);
 				padding: calc(var(0.5rem) - var(1px)) calc(var(1rem) - var(1px));
 				margin-right: 10px;
-				@media screen and (max-width: 800px) {
+				@media screen and (max-width: 900px) {
 					display: none;
 				}
 			}
@@ -106,7 +107,7 @@ header {
 				&:nth-child(2) {
 					display: none;
 				}
-				@media screen and (max-width: 800px) {
+				@media screen and (max-width: 900px) {
 					display: block !important;
 					margin: 0 0.25rem;
 				}

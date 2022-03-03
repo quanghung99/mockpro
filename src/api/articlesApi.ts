@@ -17,7 +17,8 @@ export const articlesApi = {
 		return axiosCustom.get(url);
 	},
 	getFeedArticles(filter: articleFilter): Promise<articlesResponse> {
-		const url = `/articles/feed${filter}`;
+		const filterString = stringify(filter);
+		const url = `/articles/feed?${filterString}`;
 		return axiosCustom.get(url);
 	},
 	getArticle(slug: string): Promise<articleSlug> {

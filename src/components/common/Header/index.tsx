@@ -16,6 +16,7 @@ import styles from './styles.module.scss';
 
 const Header = () => {
 	const auth = useAppSelector((state) => state.auth);
+	const filter = useAppSelector((state) => state.article.filer);
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const dispatch = useAppDispatch();
 	const navigate = useHistory();
@@ -30,7 +31,7 @@ const Header = () => {
 		localStorage.removeItem('access_token');
 		handleClose();
 		dispatch(authAction.signOut());
-		dispatch(articleAction.getListArticle());
+		dispatch(articleAction.getListArticle(filter));
 	};
 	return (
 		<AppBar

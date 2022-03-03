@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Avatar, Button, Chip, Paper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { articleModel } from 'models';
 import * as React from 'react';
@@ -12,35 +12,59 @@ export interface IArticleListProps {
 export default function ArticleList({ articleList }: IArticleListProps) {
 	return (
 		<div className={styles.articleList}>
-			<Typography variant="h5" sx={{ fontWeight: 'bold' }} textAlign="left">
-				Posts
-			</Typography>
 			<Box>
-				<ul>
-					{articleList.map((article: articleModel, index: number) => {
-						const dateUpdate = new Date(article?.updatedAt);
-						return (
-							<li key={index}>
-								<div className={styles.articleTag}>
+				{articleList.map((article: articleModel, index: number) => {
+					const dateUpdate = new Date(article?.updatedAt);
+					return (
+						<Paper
+							elevation={2}
+							key={index}
+							className={styles.articleList__item}
+						>
+							<Box display={'flex'} alignItems="center" my="10px">
+								<Avatar
+									className={styles.avatarUser}
+									sx={{ width: '32px', height: '32px' }}
+									src={article.author.image}
+									alt={article.author.username}
+								/>
+								<Box
+									ml="10px"
+									display={'flex'}
+									alignItems="flex-start"
+									flexDirection={'column'}
+									justifyContent={'flex-start'}
+								>
+									<Typography className={styles.articleUsername}>
+										{article.author.username}
+									</Typography>
+									<Typography className={styles.articleDate}>
+										{dateUpdate.toDateString()}
+									</Typography>
+								</Box>
+							</Box>
+							<Box ml="40px">
+								<Typography
+									my="10px"
+									fontSize={'30px'}
+									fontWeight={'500'}
+									variant="h5"
+									component={'article'}
+								>
+									<Link to={`/${article.slug}`}>{article.title}</Link>
+								</Typography>
+								<div>
 									{article.tagList?.map((tag, index) => (
-										<div key={index}>{tag}</div>
+										<Chip size="small" key={index} label={tag} />
 									))}
 								</div>
-								<h2>
-									<Link to={`/${article.slug}`}>{article.title}</Link>
-								</h2>
+
 								<p className={styles.articleBody}>{article.body}</p>
-								<img src={article.author.image} alt={article.author.username} />
-								<p className={styles.articleUsername}>
-									{article.author.username}
-								</p>
-								<p className={styles.articleDate}>
-									{dateUpdate.toDateString()}
-								</p>
-							</li>
-						);
-					})}
-				</ul>
+								<Button>❤ {article.favoritesCount}</Button>
+							</Box>
+						</Paper>
+					);
+				})}
 			</Box>
 		</div>
 	);

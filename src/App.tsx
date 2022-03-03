@@ -13,6 +13,7 @@ import { authAction } from 'features/auth/authSlice';
 import { WithAuth } from 'utils/authGuard';
 import { articleAction } from 'features/articles/articleSlice';
 import Article from 'features/articles/Article';
+import Settings from 'components/Settings';
 
 function App() {
 	const isLogging = useAppSelector((state) => state.auth.isLogging);
@@ -28,6 +29,7 @@ function App() {
 				<Route component={WithAuth(LoginPage)} path="/login" />
 				<Route component={SignUpPage} path="/register" />
 				<Route path="/blog" component={Article} />
+				<Route path="/setting" component={Settings} />
 			</Switch>
 			<Footer />
 			<ToastContainer

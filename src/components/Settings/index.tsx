@@ -1,8 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Container, Grid, Typography } from '@mui/material';
-import { userApi } from 'api';
+import { updateUserData, userApi } from 'api';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import InputField from 'components/common/CustomField/InputField';
 import TextAreaField from 'components/common/CustomField/TextAreaField';
+import { authAction } from 'features/auth/authSlice';
 import { userModel } from 'models';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
@@ -27,37 +29,40 @@ const schema = yup.object({
 export interface ISettingsProps {}
 
 export default function Settings(props: ISettingsProps) {
+	const currentUser = useAppSelector((state) => state.auth.userState.user);
+	const dispatch = useAppDispatch();
 	const {
 		control,
 		handleSubmit,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
-			imgUrl: '',
-			username: '',
-			bio: '',
-			email: '',
+			imgUrl: currentUser.image,
+			username: currentUser.username,
+			bio: currentUser.bio || '',
+			email: currentUser.email,
 			password: '',
 		},
 		resolver: yupResolver(schema),
 	});
 
-	const onsubmit = (value: any) => {
+	const submitFormValue = (value: any) => {
 		console.log(value);
+		const submitValue: updateUserData = {
+			user: {
+				image: value.image,
+				bio: value.bio,
+				username: value.username,
+				password: value.password,
+				email: value.email,
+			},
+		};
+		dispatch(authAction.updateUserProfile(submitValue));
 	};
-
-	const [user, setUser] = React.useState<userModel>();
-
-	React.useEffect(() => {
-		(async () => {
-			const res = await userApi.getCurrentUser();
-			setUser(res);
-		})();
-	}, []);
 	return (
 		<Container maxWidth="md" className={styles.settingSection}>
 			<Typography variant="h4">
-				Settings for <span>@{user?.user.username}</span>
+				Settings for <span>@{currentUser.username}</span>
 			</Typography>
 			<Grid
 				container
@@ -101,25 +106,19 @@ export default function Settings(props: ISettingsProps) {
 						<Button>Connect Forem Account</Button>
 						<Button>Connect Twitter Account</Button>
 					</div>
-					<form action="" className={styles.settingSection__formSetting}>
+					<form
+						onSubmit={handleSubmit(submitFormValue)}
+						action=""
+						className={styles.settingSection__formSetting}
+					>
 						<Typography>User</Typography>
 						<div>
 							<label>Username</label>
-							<InputField
-								control={control}
-								name="username"
-								value={user?.user.username || ''}
-								label={''}
-							/>
+							<InputField control={control} name="username" label={''} />
 						</div>
 						<div>
 							<label>Email</label>
-							<InputField
-								control={control}
-								name="email"
-								value={user?.user.email || ''}
-								label={''}
-							/>
+							<InputField control={control} name="email" label={''} />
 						</div>
 						<div>
 							<label>Bio</label>
@@ -134,19 +133,19 @@ export default function Settings(props: ISettingsProps) {
 						<div>
 							<label>Profile image</label>
 							<div className={styles.settingSection__profilePic}>
-								<img src={user?.user.image} alt={user?.user.username} />
+								<img src={currentUser.image} alt={currentUser.username} />
 								<InputField
 									control={control}
-									name="email"
-									type={'file'}
+									name="imgUrl"
+									type={'text'}
 									label={''}
 								/>
 							</div>
 						</div>
+						<div className={styles.settingSection__saveBtn}>
+							<Button type="submit">Save Profile Information</Button>
+						</div>
 					</form>
-					<div className={styles.settingSection__saveBtn}>
-						<Button>Save Profile Information</Button>
-					</div>
 				</Grid>
 			</Grid>
 		</Container>

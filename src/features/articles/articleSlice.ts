@@ -1,6 +1,11 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
-import { articleFilter, articleModel, tagModel } from 'models';
+import {
+	articleFilter,
+	articleModel,
+	articlesResponse,
+	tagModel,
+} from 'models';
 
 interface State {
 	articles: articleModel[];
@@ -8,6 +13,7 @@ interface State {
 	isLoading: boolean;
 	error: string;
 	tags: string[];
+	totalCount: number;
 }
 
 const initialState: State = {
@@ -18,6 +24,7 @@ const initialState: State = {
 		limit: 0,
 		offset: 0,
 	},
+	totalCount: 3,
 	tags: [],
 };
 
@@ -28,8 +35,9 @@ const articleSlice = createSlice({
 		getListArticle: (state, action: PayloadAction<articleFilter>) => {
 			state.isLoading = true;
 		},
-		setListArticle: (state, action: PayloadAction<articleModel[]>) => {
-			state.articles = action.payload;
+		setListArticle: (state, action: PayloadAction<articlesResponse>) => {
+			state.articles = action.payload.articles;
+			state.totalCount = action.payload.articlesCount;
 			state.isLoading = false;
 		},
 		getTag: () => {},

@@ -10,7 +10,7 @@ function* fetchAllArticle(action: PayloadAction<articleFilter>) {
 			articlesApi.getListArticles,
 			action.payload
 		);
-		yield put(articleAction.setListArticle(res.articles));
+		yield put(articleAction.setListArticle(res));
 	} catch (error) {}
 }
 function* fetchArticleByFilter(action: PayloadAction<articleFilter>) {
@@ -19,7 +19,7 @@ function* fetchArticleByFilter(action: PayloadAction<articleFilter>) {
 			articlesApi.getListArticles,
 			action.payload
 		);
-		yield put(articleAction.setListArticle(res.articles));
+		yield put(articleAction.setListArticle(res));
 	} catch (error) {}
 }
 function* fetchAllUserFeed(action: PayloadAction<articleFilter>) {
@@ -28,7 +28,7 @@ function* fetchAllUserFeed(action: PayloadAction<articleFilter>) {
 			articlesApi.getFeedArticles,
 			action.payload
 		);
-		yield put(articleAction.setListArticle(res.articles));
+		yield put(articleAction.setListArticle(res));
 	} catch (error) {}
 }
 function* fetchTag() {

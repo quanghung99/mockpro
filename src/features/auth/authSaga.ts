@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { authApi, userApi } from 'api';
+import { authApi, updateUserData, userApi } from 'api';
 import { AxiosError } from 'axios';
 import { push } from 'connected-react-router';
 import { loginData, signUpData, userModel } from 'models';
@@ -50,8 +50,26 @@ function* handleGetUserProfile() {
 		yield put(authAction.loginFaile());
 	}
 }
+function* handleChangeUserProfile(action: PayloadAction<updateUserData>) {
+	try {
+		const res: userModel = yield call(
+			userApi.updateCurrentUser,
+			action.payload
+		);
+		yield put(authAction.updateUserSuccess(res));
+		toast.success('Update Success');
+	} catch (error) {
+		yield put(authAction.updateUserFail());
+		const err = error as AxiosError;
+		if (err.response) {
+			console.log(err.response);
+			toast.error(err.response.data);
+		}
+	}
+}
 export default function* authSaga() {
 	yield takeLatest(authAction.login.type, hanleLogin);
 	yield takeLatest(authAction.signUp.type, handleSignUp);
 	yield takeLatest(authAction.getCurrentUser.type, handleGetUserProfile);
+	yield takeLatest(authAction.updateUserProfile.type, handleChangeUserProfile);
 }

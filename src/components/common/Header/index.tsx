@@ -150,7 +150,7 @@ const Header = () => {
 											</MenuItem>
 											<MenuItem
 												onClick={() => {
-													navigate.push('/setting');
+													navigate.push('/#');
 													handleClose();
 												}}
 											>

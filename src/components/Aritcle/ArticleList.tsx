@@ -3,7 +3,7 @@ import { Box } from '@mui/system';
 import { articlesApi } from 'api';
 import { articleModel } from 'models';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styles from './styles.module.scss';
 
 export interface IArticleListProps {
@@ -21,11 +21,12 @@ const getFavoriteList = (articleList: articleModel[]) => {
 		};
 	});
 };
-
 export default function ArticleList({ articleList }: IArticleListProps) {
 	const [listFavorite, setListFavorite] = React.useState<typeFavorite[]>(
 		getFavoriteList(articleList)
 	);
+	const navigate = useHistory();
+
 	const handleClickFavorite = async (slug: string, index: number) => {
 		try {
 			const newList = listFavorite.map((value, index2) => {
@@ -71,7 +72,14 @@ export default function ArticleList({ articleList }: IArticleListProps) {
 							key={index}
 							className={styles.articleList__item}
 						>
-							<Box display={'flex'} alignItems="center" my="10px">
+							<Box
+								display={'flex'}
+								alignItems="center"
+								my="10px"
+								onClick={() =>
+									navigate.push(`/profile/${article.author.username}`)
+								}
+							>
 								<Avatar
 									className={styles.avatarUser}
 									sx={{ width: '32px', height: '32px' }}

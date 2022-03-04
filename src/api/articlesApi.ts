@@ -40,12 +40,12 @@ export const articlesApi = {
 		const url = `/articles/${slug}`;
 		return axiosCustom.delete(url);
 	},
-	favoriteArticle(slug: string): Promise<articleModel> {
+	favoriteArticle(slug: string): Promise<any> {
 		const url = `/articles/${slug}/favorite`;
 		return axiosCustom.post(url);
 	},
 
-	unfavoriteArticle(slug: string): Promise<articleModel> {
+	unfavoriteArticle(slug: string): Promise<any> {
 		const url = `/articles/${slug}/favorite`;
 		return axiosCustom.delete(url);
 	},

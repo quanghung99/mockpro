@@ -1,5 +1,6 @@
 import { Avatar, Button, Chip, Paper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import { articlesApi } from 'api';
 import { articleModel } from 'models';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
@@ -8,8 +9,57 @@ import styles from './styles.module.scss';
 export interface IArticleListProps {
 	articleList: articleModel[];
 }
+interface typeFavorite {
+	isFavorited: Boolean;
+	favoriteCount: number;
+}
+const getFavoriteList = (articleList: articleModel[]) => {
+	return articleList.map((value) => {
+		return {
+			isFavorited: value.favorited,
+			favoriteCount: value.favoritesCount,
+		};
+	});
+};
 
 export default function ArticleList({ articleList }: IArticleListProps) {
+	const [listFavorite, setListFavorite] = React.useState<typeFavorite[]>(
+		getFavoriteList(articleList)
+	);
+	const handleClickFavorite = async (slug: string, index: number) => {
+		try {
+			const newList = listFavorite.map((value, index2) => {
+				if (index2 === index) {
+					return {
+						favoriteCount: value.favoriteCount + 1,
+						isFavorited: !value.isFavorited,
+					};
+				}
+				return value;
+			});
+			setListFavorite(newList);
+			await articlesApi.favoriteArticle(slug);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+	const handleUnFavorite = async (slug: string, index: number) => {
+		try {
+			const newList = listFavorite.map((value, index2) => {
+				if (index2 === index) {
+					return {
+						favoriteCount: value.favoriteCount - 1,
+						isFavorited: !value.isFavorited,
+					};
+				}
+				return value;
+			});
+			setListFavorite(newList);
+			await articlesApi.unfavoriteArticle(slug);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 	return (
 		<div className={styles.articleList}>
 			<Box>
@@ -60,7 +110,18 @@ export default function ArticleList({ articleList }: IArticleListProps) {
 								</div>
 
 								<p className={styles.articleBody}>{article.body}</p>
-								<Button>❤ {article.favoritesCount}</Button>
+								<Button
+									variant={
+										listFavorite[index].isFavorited ? 'contained' : 'text'
+									}
+									onClick={() => {
+										listFavorite[index].isFavorited
+											? handleUnFavorite(article.slug, index)
+											: handleClickFavorite(article.slug, index);
+									}}
+								>
+									❤ {listFavorite[index].favoriteCount}
+								</Button>
 							</Box>
 						</Paper>
 					);

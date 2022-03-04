@@ -1,15 +1,4 @@
-import {
-	Container,
-	Grid,
-	List,
-	ListItem,
-	ListItemButton,
-	ListItemIcon,
-	ListItemText,
-	Skeleton,
-	Tab,
-	Tabs,
-} from '@mui/material';
+import { Container, Grid, Skeleton, Tab, Tabs } from '@mui/material';
 import { Box } from '@mui/system';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import ArticleFilter from 'components/Aritcle/ArticleFilter';

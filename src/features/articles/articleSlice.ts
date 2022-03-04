@@ -5,6 +5,7 @@ import {
 	articleModel,
 	articlesResponse,
 	tagModel,
+	articleParamCreate,
 } from 'models';
 
 interface State {
@@ -51,6 +52,7 @@ const articleSlice = createSlice({
 			state.filter = action.payload;
 			state.isLoading = true;
 		},
+		addArticle: (state, action: PayloadAction<articleParamCreate>) => {},
 	},
 });
 

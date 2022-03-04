@@ -4,7 +4,6 @@ import LoginPage from 'components/LogIn';
 import Profile from 'components/Profile';
 import Settings from 'components/Settings';
 import SignUpPage from 'components/SignUp';
-import Article from 'features/articles/Article';
 import { authAction } from 'features/auth/authSlice';
 import { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
@@ -14,6 +13,10 @@ import { WithAuth } from 'utils/authGuard';
 import './App.css';
 import Footer from './components/common/Footer';
 import Header from './components/common/Header';
+import { articleAction } from 'features/articles/articleSlice';
+import Article from 'features/articles/Article';
+import ArticleDetail from 'components/ArticleDetail';
+import EditArticlePage from 'components/EditArticle/index';
 
 function App() {
 	const isLogging = useAppSelector((state) => state.auth.isLogging);
@@ -32,6 +35,9 @@ function App() {
 				<Route path="/profile">
 					<Profile />
 				</Route>
+				<Route path="/article/:slug" component={ArticleDetail}></Route>
+				<Route path="/editor/:slug" component={EditArticlePage}></Route>
+				<Route path="/editor" component={EditArticlePage}></Route>
 			</Switch>
 			<Footer />
 			<ToastContainer

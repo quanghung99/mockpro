@@ -120,7 +120,9 @@ const Header = () => {
 										>
 											<MenuItem
 												onClick={() => {
-													navigate.push('/profile');
+													navigate.push(
+														`/profile/${auth.userState.user.username}`
+													);
 													handleClose();
 												}}
 												sx={{ marginBottom: '0.5rem' }}

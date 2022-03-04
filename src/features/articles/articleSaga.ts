@@ -37,9 +37,25 @@ function* fetchTag() {
 		yield put(articleAction.getTagSuccess(res));
 	} catch (error) {}
 }
+
+function* deleteArticle(action: PayloadAction<string>) {
+	yield call(articlesApi.deleteArticle, action.payload);
+}
+
+function* favorArticle(action: PayloadAction<string>) {
+	yield call(articlesApi.favoriteArticle, action.payload);
+}
+
+function* unFavorArticle(action: PayloadAction<string>) {
+	yield call(articlesApi.unfavoriteArticle, action.payload);
+}
+
 export default function* articleSaga() {
 	yield takeLatest(articleAction.getListArticle.type, fetchAllArticle);
 	yield takeLatest(articleAction.getListFeed.type, fetchAllUserFeed);
 	yield takeLatest(articleAction.changeFilter.type, fetchArticleByFilter);
 	yield takeLatest(articleAction.getTag.type, fetchTag);
+	yield takeLatest(articleAction.deleteArticle, deleteArticle);
+	yield takeLatest(articleAction.favorArticle, favorArticle);
+	yield takeLatest(articleAction.unFavorArticle, unFavorArticle);
 }

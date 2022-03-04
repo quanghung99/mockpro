@@ -1,7 +1,7 @@
 import { Backdrop, CircularProgress } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import LoginPage from 'components/LogIn';
-import Profile from 'components/Profile';
+import ProfilePage from 'components/Profile';
 import Settings from 'components/Settings';
 import SignUpPage from 'components/SignUp';
 import Article from 'features/articles/Article';
@@ -30,7 +30,7 @@ function App() {
 				<Route path="/blog" component={Article} />
 				<Route path="/setting" component={Settings} />
 				<Route path="/profile">
-					<Profile />
+					<ProfilePage />
 				</Route>
 			</Switch>
 			<Footer />

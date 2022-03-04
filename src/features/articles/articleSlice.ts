@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
-import { articleFilter, articleModel } from 'models';
+import { articleFilter, articleModel, articleParamCreate } from 'models';
 
 interface State {
 	articles: articleModel[];
@@ -33,6 +33,7 @@ const articleSlice = createSlice({
 		changeFilter: (state, action: PayloadAction<articleFilter>) => {
 			state.filer = action.payload;
 		},
+		addArticle: (state, action: PayloadAction<articleParamCreate>) => {},
 	},
 });
 

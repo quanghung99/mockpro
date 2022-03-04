@@ -1,6 +1,7 @@
-import { TextareaAutosize, TextField } from '@mui/material';
+import { TextareaAutosize, TextField, Typography } from '@mui/material';
 import * as React from 'react';
 import { Control, useController } from 'react-hook-form';
+import styles from './styles.module.scss';
 
 export interface TextAreaFieldProps
 	extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -26,6 +27,7 @@ export default function TextAreaField({
 	return (
 		<div>
 			<TextareaAutosize
+				className={styles.textAreaField}
 				onBlur={onBlur}
 				onChange={onChange}
 				value={value}
@@ -33,8 +35,9 @@ export default function TextAreaField({
 				placeholder={inputProps.placeholder}
 				style={{
 					boxSizing: 'border-box',
+					borderColor: '#ccc',
 					width: '100%',
-					borderRadius: '10px',
+					borderRadius: '4px',
 					padding: '16px 14px',
 					fontSize: '16px',
 					outlineColor: '#66afe9',

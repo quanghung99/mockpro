@@ -1,6 +1,8 @@
+@import url('./utils/fonts/segoe-ui-4-cufonfonts-webfont/style.css');
 .App {
 	text-align: center;
 	box-sizing: border-box;
+	font-family: 'Segoe UI Regular';
 }
 
 .App-logo {

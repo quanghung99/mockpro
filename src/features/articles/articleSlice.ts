@@ -1,10 +1,10 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
 import { articleFilter, articleModel, tagModel } from 'models';
 
 interface State {
 	articles: articleModel[];
-	filer: articleFilter;
+	filter: articleFilter;
 	isLoading: boolean;
 	error: string;
 	tags: string[];
@@ -14,8 +14,8 @@ const initialState: State = {
 	articles: [],
 	isLoading: true,
 	error: '',
-	filer: {
-		limit: 10,
+	filter: {
+		limit: 0,
 		offset: 0,
 	},
 	tags: [],
@@ -40,15 +40,23 @@ const articleSlice = createSlice({
 			state.isLoading = true;
 		},
 		changeFilter: (state, action: PayloadAction<articleFilter>) => {
-			state.filer = action.payload;
+			state.filter = action.payload;
 			state.isLoading = true;
 		},
-		
 	},
 });
 
 export const articleAction = articleSlice.actions;
 export const selectArticleList = (state: RootState) => state.article.articles;
+export const selectArticleFilter = (state: RootState) => state.article.filter;
+export const selectArticleListByUser = createSelector(
+	selectArticleList,
+	(articleList) =>
+		articleList.reduce((map: { [key: string]: articleModel }, article) => {
+			map[article.author.username] = article;
+			return map;
+		}, {})
+);
 export const selectIsLoading = (state: RootState) => state.article.isLoading;
 const articleReducer = articleSlice.reducer;
 export default articleReducer;

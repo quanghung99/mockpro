@@ -1,6 +1,7 @@
 import { Backdrop, CircularProgress } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import LoginPage from 'components/LogIn';
+import Profile from 'components/Profile';
 import Settings from 'components/Settings';
 import SignUpPage from 'components/SignUp';
 import Article from 'features/articles/Article';
@@ -16,7 +17,6 @@ import Header from './components/common/Header';
 
 function App() {
 	const isLogging = useAppSelector((state) => state.auth.isLogging);
-
 	const dispatch = useAppDispatch();
 	useEffect(() => {
 		dispatch(authAction.getCurrentUser());
@@ -29,6 +29,9 @@ function App() {
 				<Route component={SignUpPage} path="/register" />
 				<Route path="/blog" component={Article} />
 				<Route path="/setting" component={Settings} />
+				<Route path="/profile">
+					<Profile />
+				</Route>
 			</Switch>
 			<Footer />
 			<ToastContainer

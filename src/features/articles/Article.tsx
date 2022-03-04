@@ -16,7 +16,7 @@ const Article = () => {
 	const isLoading = useAppSelector(selectIsLoading);
 	const articleList = useAppSelector(selectArticleList);
 	const hashTag = useAppSelector((state) => state.article.tags);
-	const filter = useAppSelector((state) => state.article.filer);
+	const filter = useAppSelector((state) => state.article.filter);
 	const dispatch = useAppDispatch();
 	const [tagValue, setTagValue] = useState('1');
 	const [hashTagValue, setHashTagValue] = useState('');

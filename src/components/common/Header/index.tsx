@@ -23,7 +23,6 @@ import styles from './styles.module.scss';
 
 const Header = () => {
 	const auth = useAppSelector((state) => state.auth);
-	const filter = useAppSelector((state) => state.article.filer);
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const [toggleShow, setToggleShow] = useState<boolean>(false);
 	const dispatch = useAppDispatch();
@@ -43,8 +42,14 @@ const Header = () => {
 		localStorage.removeItem('access_token');
 		handleClose();
 		dispatch(authAction.signOut());
-		dispatch(articleAction.getListArticle(filter));
+		dispatch(
+			articleAction.getListArticle({
+				limit: 10,
+				offset: 0,
+			})
+		);
 	};
+
 	return (
 		<AppBar
 			position="sticky"
@@ -133,7 +138,9 @@ const Header = () => {
 											</MenuItem>
 											<MenuItem
 												onClick={() => {
-													navigate.push('/profile');
+													navigate.push(
+														`/profile/${auth.userState.user.username}`
+													);
 													handleClose();
 												}}
 											>

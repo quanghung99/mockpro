@@ -6,8 +6,17 @@ export const userApi = {
 		const url = 'user';
 		return axiosCustom.get(url);
 	},
-	updateCurrentUser(updateUserData: userModel): Promise<userModel> {
+	updateCurrentUser(updateUserData: updateUserData): Promise<userModel> {
 		const url = 'user';
 		return axiosCustom.put(url, updateUserData);
 	},
 };
+export interface updateUserData {
+	user: {
+		email: string;
+		bio: string;
+		password: string;
+		username: string;
+		image: string;
+	};
+}

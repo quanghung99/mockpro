@@ -1,4 +1,11 @@
-import { Container, Grid, Skeleton, Tab, Tabs } from '@mui/material';
+import {
+	Container,
+	Grid,
+	Pagination,
+	Skeleton,
+	Tab,
+	Tabs,
+} from '@mui/material';
 import { Box } from '@mui/system';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import ArticleFilter from 'components/Aritcle/ArticleFilter';
@@ -14,44 +21,56 @@ import {
 
 const Article = () => {
 	const isLoading = useAppSelector(selectIsLoading);
+	const isLogged = useAppSelector((state) => state.auth.isLogged);
 	const articleList = useAppSelector(selectArticleList);
 	const hashTag = useAppSelector((state) => state.article.tags);
 	const filter = useAppSelector((state) => state.article.filter);
+	const totalCount = useAppSelector((state) => state.article.totalCount);
 	const dispatch = useAppDispatch();
-	const [tagValue, setTagValue] = useState('1');
+	const [tagValue, setTagValue] = useState('2');
 	const [hashTagValue, setHashTagValue] = useState('');
+	const [page, setPage] = React.useState(1);
 	useEffect(() => {
 		dispatch(articleAction.getTag());
 	}, [dispatch]);
 	useEffect(() => {
 		if (tagValue === '2') {
 			const newFilter: articleFilter = {
-				limit: 10,
-				offset: 0,
+				limit: 3,
+				offset: (page - 1) * 3,
 			};
 			dispatch(articleAction.getListArticle(newFilter));
 			console.log(tagValue);
 		} else if (tagValue === '1') {
 			const newFilter: articleFilter = {
-				limit: 10,
-				offset: 0,
+				limit: 3,
+				offset: (page - 1) * 3,
 			};
 			dispatch(articleAction.getListFeed(newFilter));
+		} else if (tagValue === '3') {
+			const newFilter: articleFilter = {
+				...filter,
+				tag: hashTagValue,
+			};
+			dispatch(articleAction.changeFilter(newFilter));
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [tagValue, dispatch]);
+	}, [tagValue, dispatch, page, hashTagValue]);
 	const handleChange = (event: React.SyntheticEvent, newValue: string) => {
 		setHashTagValue('');
+		setPage(1);
 		setTagValue(newValue);
+	};
+	const handleChangePagination = (
+		event: React.ChangeEvent<unknown>,
+		value: number
+	) => {
+		setPage(value);
 	};
 	const handleClickTag = (tag: string) => {
 		setHashTagValue(tag);
+		setPage(1);
 		setTagValue('3');
-		const newFilter: articleFilter = {
-			...filter,
-			tag: tag,
-		};
-		dispatch(articleAction.changeFilter(newFilter));
 	};
 	return (
 		<Container maxWidth={'lg'} sx={{ mt: '40px' }}>
@@ -66,7 +85,13 @@ const Article = () => {
 							onChange={handleChange}
 							aria-label="basic tabs example"
 						>
-							<Tab sx={{ textTransform: 'none' }} label="Your Feed" value="1" />
+							{isLogged && (
+								<Tab
+									sx={{ textTransform: 'none' }}
+									label="Your Feed"
+									value="1"
+								/>
+							)}
 							<Tab
 								sx={{ textTransform: 'none' }}
 								label="Global Feed"
@@ -93,6 +118,12 @@ const Article = () => {
 					) : (
 						<ArticleList articleList={articleList} />
 					)}
+					<Pagination
+						page={page}
+						count={Math.ceil(totalCount / 3)}
+						onChange={handleChangePagination}
+						color="primary"
+					/>
 				</Grid>
 				<Grid
 					item

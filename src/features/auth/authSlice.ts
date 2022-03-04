@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { updateUserData } from 'api';
 import { loginData, signUpData, userModel } from 'models';
 
 interface authType {
@@ -46,6 +47,16 @@ const authSlice = createSlice({
 		signOut(state) {
 			state.isLogged = false;
 			state.userState = initialState.userState;
+		},
+		updateUserProfile(state, action: PayloadAction<updateUserData>) {
+			state.isLogging = true;
+		},
+		updateUserSuccess(state, action: PayloadAction<userModel>) {
+			state.isLogging = false;
+			state.userState = action.payload;
+		},
+		updateUserFail(state) {
+			state.isLogging = false;
 		},
 	},
 });

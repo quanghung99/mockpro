@@ -1,12 +1,10 @@
-import React from 'react';
-import { Avatar, Box, Button, Typography, Container } from '@mui/material';
-import { profileModel } from 'models';
-import { ConnectingAirportsOutlined } from '@mui/icons-material';
-import { useAppSelector } from 'app/hooks';
+import { Avatar, Box, Button, Container, Typography } from '@mui/material';
 import { RootState } from 'app/store';
+import { articleAction } from 'features/articles/articleSlice';
+import { profileModel } from 'models';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { articleAction } from 'features/articles/articleSlice';
 type Props = {
 	profile: profileModel['profile'];
 	slug: string;
@@ -60,7 +58,7 @@ export default function SideRight({ profile, slug }: Props) {
 								transform: 'translateY(-10px)',
 							}}
 						>
-							<Avatar src={profile.image}></Avatar>
+							<Avatar src={profile.image} />
 							<Typography
 								sx={{
 									fontFamily: 'Segoe UI Bold',
@@ -72,9 +70,7 @@ export default function SideRight({ profile, slug }: Props) {
 							</Typography>
 						</Box>
 						<Typography variant="body2" align="justify">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							Recusandae magni molestiae quidem labore aliquam illo amet esse
-							modi.
+							{profile.bio}
 						</Typography>
 						{profile.username === currentUser ? (
 							<>

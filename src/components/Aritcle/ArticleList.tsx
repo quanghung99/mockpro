@@ -92,6 +92,7 @@ export default function ArticleList({ articleList }: IArticleListProps) {
 									alignItems="flex-start"
 									flexDirection={'column'}
 									justifyContent={'flex-start'}
+									sx={{ cursor: 'pointer' }}
 								>
 									<Typography className={styles.articleUsername}>
 										{article.author.username}
@@ -117,7 +118,9 @@ export default function ArticleList({ articleList }: IArticleListProps) {
 									))}
 								</div>
 
-								<p className={styles.articleBody}>{article.body}</p>
+								<p className={styles.articleBody}>
+									<Link to={`/article/${article.slug}`}>{article.body}</Link>
+								</p>
 								<Button
 									variant={
 										listFavorite[index].isFavorited ? 'contained' : 'text'

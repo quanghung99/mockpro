@@ -1,25 +1,21 @@
+import ClearIcon from '@mui/icons-material/Clear';
 import {
 	Box,
 	Button,
 	Container,
-	Grid,
+	Paper,
 	TextareaAutosize,
 	TextField,
 	Typography,
-	Paper,
 } from '@mui/material';
-import React, { SetStateAction, useEffect, useState } from 'react';
-import { SubmitHandler, useController, useForm } from 'react-hook-form';
-import { transform } from 'typescript';
-import styles from './styles.module.scss';
-import { articleModel, articleParamCreate } from '../../models/article';
-import { DataArrayTwoTone } from '@mui/icons-material';
-import ClearIcon from '@mui/icons-material/Clear';
-import { useDispatch, useSelector } from 'react-redux';
-import { articleAction } from 'features/articles/articleSlice';
 import { RootState } from 'app/store';
+import { articleAction } from 'features/articles/articleSlice';
+import React, { useEffect, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 import { RouterProps } from 'react-router-dom';
-import { SSL_OP_TLS_D5_BUG } from 'constants';
+import { articleModel, articleParamCreate } from '../../models/article';
+import styles from './styles.module.scss';
 enum Guide {
 	None,
 	Title,
@@ -47,7 +43,7 @@ export default function EditArticlePage(props: RouterProps) {
 	let dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(articleAction.getListArticle({}));
-	}, ['']);
+	}, [dispatch]);
 	let article: articleModel | null | undefined =
 		articles.length > 0
 			? articles.find((a) => {
@@ -55,13 +51,7 @@ export default function EditArticlePage(props: RouterProps) {
 			  })
 			: null;
 	console.log('article', article);
-	const {
-		register,
-		handleSubmit,
-		watch,
-		formState: { errors },
-		reset,
-	} = useForm<Inputs>({
+	const { register, handleSubmit, reset } = useForm<Inputs>({
 		defaultValues: {
 			title: '',
 			tags: '',
@@ -72,7 +62,7 @@ export default function EditArticlePage(props: RouterProps) {
 	if (
 		article !== null &&
 		article !== undefined &&
-		tagsCache.length == 0 &&
+		tagsCache.length === 0 &&
 		donePrepare === false &&
 		startEdit === true
 	) {
@@ -147,10 +137,10 @@ export default function EditArticlePage(props: RouterProps) {
 				tags: '',
 				otherTags: '',
 			});
-		} else if (e.key == 'Backspace') {
+		} else if (e.key === 'Backspace') {
 			let value = (e.target as any).value;
 
-			if (value == '') {
+			if (value === '') {
 				setTagsCache(tagsCache.splice(0, tagsCache.length - 1));
 				reset({
 					tags: '',

@@ -40,6 +40,7 @@ const Header = () => {
 	};
 	const handleSignOut = () => {
 		localStorage.removeItem('access_token');
+		navigate.push('/');
 		handleClose();
 		dispatch(authAction.signOut());
 		dispatch(
@@ -141,9 +142,7 @@ const Header = () => {
 											</MenuItem>
 											<MenuItem
 												onClick={() => {
-													navigate.push(
-														`/profile/${auth.userState.user.username}`
-													);
+													navigate.push(`/editor`);
 													handleClose();
 												}}
 											>

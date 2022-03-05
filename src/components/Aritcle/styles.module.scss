@@ -34,9 +34,9 @@
 	.tagSession_box {
 		justify-content: center;
 		height: 24px;
-		display: inline-flex;
+		width: 100%;
+		text-align: left;
 		font-size: 0.8125rem;
-		align-items: center;
 		border-radius: 16px;
 		white-space: nowrap;
 		border: 1px solid #b2bac2;
@@ -86,4 +86,8 @@
 	font-size: 14px;
 	font-weight: 300;
 	margin-left: 2px;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 }

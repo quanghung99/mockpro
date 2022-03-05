@@ -1,18 +1,48 @@
-import { Box, Button } from '@mui/material';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import PermPhoneMsgIcon from '@mui/icons-material/PermPhoneMsg';
+import { Box, Button } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import scrollEffect from './scrollEffect';
-import React, { useEffect } from 'react';
 
-type Props = {};
-
-export default function SideLeft({}: Props) {
+interface Props {
+	favorited: boolean;
+	favoritesCount: number;
+	handleFavorite: () => void;
+	handleUnfavorite: () => void;
+}
+interface typeFavorite {
+	isFavorited: Boolean;
+	favoriteCount: number;
+}
+export default function SideLeft({
+	favorited,
+	favoritesCount,
+	handleFavorite,
+	handleUnfavorite,
+}: Props) {
 	useEffect(() => {
 		// two sides animation
 		scrollEffect();
 	});
+	const [favoriteCounting, setFavoriteCounting] = useState<typeFavorite>({
+		isFavorited: favorited,
+		favoriteCount: favoritesCount,
+	});
+	const handleClickFavorite = () => {
+		handleFavorite();
+		setFavoriteCounting({
+			isFavorited: !favoriteCounting.isFavorited,
+			favoriteCount: favoriteCounting.favoriteCount + 1,
+		});
+	};
+	const handleClickUnFavorite = () => {
+		handleFavorite();
+		setFavoriteCounting({
+			isFavorited: !favoriteCounting.isFavorited,
+			favoriteCount: favoriteCounting.favoriteCount - 1,
+		});
+	};
 	return (
 		<Box
 			className="sideLeft"
@@ -36,19 +66,25 @@ export default function SideLeft({}: Props) {
 					alignItems: 'center',
 					gap: '8px',
 				}}
+				onClick={() => {
+					favoriteCounting.isFavorited
+						? handleClickUnFavorite()
+						: handleClickFavorite();
+				}}
 			>
 				<Button
-					variant="outlined"
+					variant={favoriteCounting.isFavorited ? 'contained' : 'outlined'}
+					color="primary"
 					sx={{
 						boxSizing: 'border-box',
 						borderRadius: '16px',
 						border: 'none',
-						color: '#3d3d3d',
+						fontSize: '18px',
 					}}
 				>
-					<FavoriteBorderIcon></FavoriteBorderIcon>
+					❤
 				</Button>
-				<span>7</span>
+				<span>{favoriteCounting.favoriteCount}</span>
 			</Box>
 			<Box
 				sx={{

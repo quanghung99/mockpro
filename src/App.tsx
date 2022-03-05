@@ -10,7 +10,7 @@ import Article from 'features/articles/Article';
 import { articleAction } from 'features/articles/articleSlice';
 import { authAction } from 'features/auth/authSlice';
 import { useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { WithAuth } from 'utils/authGuard';
@@ -19,7 +19,8 @@ import Footer from './components/common/Footer';
 import Header from './components/common/Header';
 
 function App() {
-	const isLogging = useAppSelector((state) => state.auth.isLogging);
+	const isLoggingAuth = useAppSelector((state) => state.auth.isLogging);
+	const isLoadingArticle = useAppSelector((state) => state.article.isLoading);
 	const dispatch = useAppDispatch();
 	useEffect(() => {
 		dispatch(authAction.getCurrentUser());
@@ -29,6 +30,7 @@ function App() {
 		<div className="App">
 			<Header />
 			<Switch>
+				<Redirect exact from="/" to="/blog" />{' '}
 				<Route component={WithAuth(LoginPage)} path="/login" />
 				<Route component={SignUpPage} path="/register" />
 				<Route path="/blog" component={Article} />
@@ -54,7 +56,7 @@ function App() {
 			/>
 			<Backdrop
 				sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-				open={isLogging}
+				open={Boolean(isLoadingArticle || isLoggingAuth)}
 			>
 				<CircularProgress color="inherit" />
 			</Backdrop>

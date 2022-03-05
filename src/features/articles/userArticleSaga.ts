@@ -19,12 +19,12 @@ function* updateArticle(
 	action: PayloadAction<{ formData: articleParamCreate; slug: string }>
 ) {
 	try {
-		let res: createResponse = yield call(
+		yield call(
 			articlesApi.updateArticle,
 			action.payload.formData,
 			action.payload.slug
 		);
-		put(push('/blog'));
+		yield put(push('/blog'));
 		toast.success('Update success!');
 	} catch (err) {
 		toast.error('Update failed!');

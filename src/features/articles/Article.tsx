@@ -3,6 +3,7 @@ import {
 	Grid,
 	Pagination,
 	Skeleton,
+	Stack,
 	Tab,
 	Tabs,
 } from '@mui/material';
@@ -73,7 +74,7 @@ const Article = () => {
 		setTagValue('3');
 	};
 	return (
-		<Container maxWidth={'lg'} sx={{ mt: '40px' }}>
+		<Container maxWidth={'lg'} sx={{ my: '40px' }}>
 			<Grid container spacing={2}>
 				<Grid item md={3} lg={2} sx={{ display: { xs: 'none', md: 'block' } }}>
 					<MenuSidebar />

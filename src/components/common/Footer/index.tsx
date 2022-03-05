@@ -5,9 +5,9 @@ import './styles.scss';
 
 const Footer = () => {
 	return (
-		<footer>
+		<footer style={{ marginTop: '20px' }}>
 			<Container>
-				<Box sx={{ paddingTop: '40px', paddingBottom: '80px' }}>
+				<Box sx={{ paddingTop: '10px', paddingBottom: '80px' }}>
 					<Typography>
 						<span> DEV Community</span> — A constructive and inclusive social
 						network for software developers. With you every step of your

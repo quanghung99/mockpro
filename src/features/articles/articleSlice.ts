@@ -53,6 +53,10 @@ const articleSlice = createSlice({
 			state.isLoading = true;
 		},
 		addArticle: (state, action: PayloadAction<articleParamCreate>) => {},
+		updateArticle: (
+			state,
+			action: PayloadAction<{ formData: articleParamCreate; slug: string }>
+		) => {},
 	},
 });
 

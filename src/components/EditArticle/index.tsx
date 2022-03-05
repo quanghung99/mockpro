@@ -46,7 +46,7 @@ export default function EditArticlePage(props: RouterProps) {
 	console.log('articles', articles);
 	let dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(articleAction.getListArticle());
+		dispatch(articleAction.getListArticle({}));
 	}, ['']);
 	let article: articleModel | null | undefined =
 		articles.length > 0
@@ -85,6 +85,12 @@ export default function EditArticlePage(props: RouterProps) {
 				};
 			})
 		);
+		reset({
+			title: article.title,
+			tags: '',
+			otherTags: '',
+			content: article.body,
+		});
 	}
 
 	const onSubmit: SubmitHandler<Inputs> = (data) => {
@@ -96,7 +102,32 @@ export default function EditArticlePage(props: RouterProps) {
 				tagList: tagsCache.map((tag) => tag.content),
 			},
 		};
-		dispatch(articleAction.addArticle(formData));
+		if (slug === undefined) {
+			reset({
+				title: '',
+				tags: '',
+				otherTags: '',
+				content: '',
+			});
+			setTagsCache([]);
+		}
+		if (slug === undefined) {
+			dispatch(articleAction.addArticle(formData));
+		} else {
+			dispatch(
+				articleAction.updateArticle({
+					formData: {
+						article: {
+							title: data.title,
+							body: data.content,
+							tagList: tagsCache.map((m) => m.content),
+						},
+					},
+					slug: slug,
+				})
+			);
+			dispatch(articleAction.getListArticle({}));
+		}
 	};
 	const handleTag = (e: any) => {
 		if (e.key === ' ' || e.code === 'Enter') {
@@ -138,10 +169,6 @@ export default function EditArticlePage(props: RouterProps) {
 	console.log('startEdit', startEdit);
 	console.log('tagsCache', tagsCache.length === 0, tagsCache);
 	return (
-		// <div>
-		// 	{tagsCache.length === 0 ? `add 4 ${forceRender}` : 'add other'}
-		// 	<button onClick={() => setForceRender(!forceRender)}>click</button>
-		// </div>
 		<Box
 			className={styles.EditArticlePage}
 			sx={{
@@ -168,6 +195,7 @@ export default function EditArticlePage(props: RouterProps) {
 								<Typography component={'h3'}>
 									Writing a Great Post Title
 								</Typography>
+
 								<ul>
 									<li>
 										Think of your post title as a super short (but compelling!)
@@ -257,7 +285,7 @@ export default function EditArticlePage(props: RouterProps) {
 										onBlur={() => setGuide(Guide.None)}
 									></TextField>
 									{/* Paper_Tags */}
-									{tagsCache.length === 0 ? `add 4 ${tagsCache}` : 'add other'}
+
 									{tagsCache.length === 0 ? (
 										<TextField
 											{...register('tags')}
@@ -341,16 +369,29 @@ export default function EditArticlePage(props: RouterProps) {
 									padding: '16px',
 								}}
 							>
-								<Button
-									type="submit"
-									size="large"
-									variant="contained"
-									sx={{
-										backgroundColor: 'royalblue',
-									}}
-								>
-									Publish
-								</Button>
+								{slug === undefined ? (
+									<Button
+										type="submit"
+										size="large"
+										variant="contained"
+										sx={{
+											backgroundColor: 'royalblue',
+										}}
+									>
+										Publish
+									</Button>
+								) : (
+									<Button
+										type="submit"
+										size="large"
+										variant="contained"
+										sx={{
+											backgroundColor: 'royalblue',
+										}}
+									>
+										Update
+									</Button>
+								)}
 							</Box>
 							{/* Button end */}
 						</form>

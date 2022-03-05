@@ -101,7 +101,7 @@ export default function ArticleList({ articleList }: IArticleListProps) {
 									variant="h5"
 									component={'article'}
 								>
-									<Link to={`/${article.slug}`}>{article.title}</Link>
+									<Link to={`/article/${article.slug}`}>{article.title}</Link>
 								</Typography>
 								<div>
 									{article.tagList?.map((tag, index) => (

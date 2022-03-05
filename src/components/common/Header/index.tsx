@@ -87,6 +87,7 @@ const Header = () => {
 										<Button
 											variant="outlined"
 											className={styles.navbar_createBtn}
+											onClick={() => navigate.push('/editor')}
 										>
 											Create Post
 										</Button>

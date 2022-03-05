@@ -1,18 +1,16 @@
-import { Backdrop, CircularProgress } from '@mui/material';
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-import LoginPage from 'components/LogIn';
-import Profile from 'components/Profile';
-import Settings from 'components/Settings';
-import SignUpPage from 'components/SignUp';
-import { authAction } from 'features/auth/authSlice';
-import { useEffect } from 'react';
+import './App.css';
+import Header from './components/common/Header';
+import Footer from './components/common/Footer';
 import { Route, Switch } from 'react-router-dom';
+import LoginPage from 'components/LogIn';
+import SignUpPage from 'components/SignUp';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { Backdrop, CircularProgress } from '@mui/material';
+import { useEffect } from 'react';
+import { authAction } from 'features/auth/authSlice';
 import { WithAuth } from 'utils/authGuard';
-import './App.css';
-import Footer from './components/common/Footer';
-import Header from './components/common/Header';
 import { articleAction } from 'features/articles/articleSlice';
 import Article from 'features/articles/Article';
 import ArticleDetail from 'components/ArticleDetail';
@@ -23,6 +21,7 @@ function App() {
 	const dispatch = useAppDispatch();
 	useEffect(() => {
 		dispatch(authAction.getCurrentUser());
+		dispatch(articleAction.getListArticle({}));
 	}, [dispatch]);
 	return (
 		<div className="App">
@@ -31,10 +30,6 @@ function App() {
 				<Route component={WithAuth(LoginPage)} path="/login" />
 				<Route component={SignUpPage} path="/register" />
 				<Route path="/blog" component={Article} />
-				<Route path="/setting" component={Settings} />
-				<Route path="/profile">
-					<Profile />
-				</Route>
 				<Route path="/article/:slug" component={ArticleDetail}></Route>
 				<Route path="/editor/:slug" component={EditArticlePage}></Route>
 				<Route path="/editor" component={EditArticlePage}></Route>

@@ -57,6 +57,7 @@ const articleSlice = createSlice({
 			state,
 			action: PayloadAction<{ formData: articleParamCreate; slug: string }>
 		) => {},
+		deleteArticle: (state, action: PayloadAction<string>) => {},
 	},
 });
 

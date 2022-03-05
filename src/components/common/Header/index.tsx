@@ -132,7 +132,7 @@ const Header = () => {
 											<hr />
 											<MenuItem
 												onClick={() => {
-													navigate.push('/profile');
+													navigate.push('/dashboard');
 													handleClose();
 												}}
 											>

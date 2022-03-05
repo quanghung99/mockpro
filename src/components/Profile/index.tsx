@@ -1,3 +1,4 @@
+import { articlesApi } from 'api';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
 	articleAction,
@@ -8,7 +9,7 @@ import {
 	profileActions,
 	selectProfileCurrent,
 } from 'features/profile/profileSlice';
-import { articleFilter, articleModel, userModel } from 'models';
+import { articleFilter } from 'models';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -27,10 +28,15 @@ export default function ProfilePage() {
 	useEffect(() => {
 		dispatch(profileActions.fetchProfile(username));
 		dispatch(articleAction.getListArticle(filter));
-	}, [dispatch, filter, articleByUser]);
+	}, [dispatch, filter]);
 
-	const handleDeleteArticle = (slug: string) => {
-		dispatch(articleAction.deleteArticle(slug));
+	const handleDeleteArticle = async (slug: string) => {
+		try {
+			await articlesApi.deleteArticle(slug);
+			dispatch(articleAction.getListArticle({ ...filter }));
+		} catch (error) {
+			console.log('delete article failed', error);
+		}
 	};
 	const handleLoadFavorited = () => {
 		setFilter({

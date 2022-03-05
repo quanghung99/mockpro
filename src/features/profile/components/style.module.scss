@@ -63,6 +63,15 @@
 			margin: 12px 0;
 			font-size: 18px;
 		}
+		.sideBarButton {
+			padding: 8px;
+			border-radius: 4px;
+			&:hover {
+				background-color: #4b4b4b;
+				color: #f5f5f5;
+				cursor: pointer;
+			}
+		}
 	}
 	.userInfo {
 		font-weight: 500;

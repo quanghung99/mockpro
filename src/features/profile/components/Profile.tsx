@@ -2,8 +2,6 @@ import {
 	AddCommentOutlined,
 	DeleteOutlined,
 	FavoriteBorderOutlined,
-	FavoriteBorderSharp,
-	FavoriteBorderTwoTone,
 	FavoriteRounded,
 	Grid3x3,
 	Textsms,
@@ -16,12 +14,15 @@ import {
 	Box,
 	Button,
 	Container,
+	Dialog,
+	DialogActions,
+	DialogTitle,
 	Grid,
 	Paper,
 	Typography,
 } from '@mui/material';
 import { articleModel, profileModel } from 'models';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import style from './style.module.scss';
 
@@ -41,6 +42,13 @@ export default function Profile({
 	handleDeleteArticle,
 }: ProfileProps) {
 	const navigate = useHistory();
+	const [open, setOpen] = useState<boolean>(false);
+
+	const handleClickOpen = () => setOpen(true);
+	const handleCloseSubmit = (slug: string) => {
+		setOpen(false);
+		handleDeleteArticle(slug);
+	};
 	return (
 		<Box className={style.rootProfile}>
 			<Box className={style.header}>
@@ -84,20 +92,26 @@ export default function Profile({
 				<Grid container className={style.grid} spacing={2}>
 					<Grid item lg={4}>
 						<Paper className={style.boardInfo}>
-							<Typography onClick={handleLoadAllPost}>
+							<Typography
+								className={style.sideBarButton}
+								onClick={handleLoadAllPost}
+							>
 								<TextSnippetIcon />
 								&nbsp; My articles
 							</Typography>
 
-							<Typography onClick={handleLoadFavorited}>
+							<Typography
+								className={style.sideBarButton}
+								onClick={handleLoadFavorited}
+							>
 								<FavoriteRounded />
 								&nbsp; Favorited
 							</Typography>
-							<Typography>
+							<Typography className={style.sideBarButton}>
 								<Textsms />
 								&nbsp; comments written
 							</Typography>
-							<Typography>
+							<Typography className={style.sideBarButton}>
 								<Grid3x3 />
 								&nbsp; tags followed
 							</Typography>
@@ -108,7 +122,7 @@ export default function Profile({
 						{articleByUser.map((article) => {
 							const date = new Date(article?.createdAt);
 							return (
-								<Paper className={style.ContainArticle}>
+								<Paper className={style.ContainArticle} key={article.slug}>
 									<Box className={style.userInfo}>
 										<Avatar
 											sx={{ width: '32px', height: '32px' }}
@@ -143,9 +157,25 @@ export default function Profile({
 										</Box>
 
 										<Box>
-											<Button onClick={() => handleDeleteArticle(article.slug)}>
+											<Button onClick={() => setOpen(true)}>
 												<DeleteOutlined /> &nbsp; Remove
 											</Button>
+											<Dialog open={open} onClose={() => setOpen(false)}>
+												<DialogTitle>
+													{'Are you sure you want to delete this article?'}
+												</DialogTitle>
+												<DialogActions>
+													<Button onClick={() => setOpen(false)}>
+														Disagree
+													</Button>
+													<Button
+														onClick={() => handleCloseSubmit(article.slug)}
+														autoFocus
+													>
+														Agree
+													</Button>
+												</DialogActions>
+											</Dialog>
 										</Box>
 									</Box>
 								</Paper>

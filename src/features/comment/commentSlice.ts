@@ -1,6 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
-import { commentModel } from 'models';
+import {
+	commentResponse,
+	commentModel,
+	addCommentParam,
+	removeCommentParam,
+} from 'models';
 
 interface commentState {
 	isLoading?: boolean;
@@ -16,15 +21,15 @@ const commentSlice = createSlice({
 	name: 'comment',
 	initialState,
 	reducers: {
-		getListComment(state, PayloadAction) {
+		getListComment(state, action: PayloadAction<string>) {
 			state.isLoading = true;
 		},
 		setListComment(state, action: PayloadAction<commentModel[]>) {
 			state.isLoading = false;
 			state.commentList = action.payload;
 		},
-		addComment(state, action: PayloadAction<commentModel>) {},
-		removeComment(state) {},
+		addComment(state, action: PayloadAction<addCommentParam>) {},
+		removeComment(state, action: PayloadAction<removeCommentParam>) {},
 	},
 });
 const commentReducer = commentSlice.reducer;

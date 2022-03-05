@@ -1,10 +1,13 @@
 import { Backdrop, CircularProgress } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
+import ArticleDetail from 'components/ArticleDetail';
+import EditArticlePage from 'components/EditArticle/index';
 import LoginPage from 'components/LogIn';
 import ProfilePage from 'components/Profile';
 import Settings from 'components/Settings';
 import SignUpPage from 'components/SignUp';
 import Article from 'features/articles/Article';
+import { articleAction } from 'features/articles/articleSlice';
 import { authAction } from 'features/auth/authSlice';
 import { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
@@ -20,6 +23,7 @@ function App() {
 	const dispatch = useAppDispatch();
 	useEffect(() => {
 		dispatch(authAction.getCurrentUser());
+		dispatch(articleAction.getListArticle({}));
 	}, [dispatch]);
 	return (
 		<div className="App">
@@ -32,6 +36,9 @@ function App() {
 				<Route path="/profile">
 					<ProfilePage />
 				</Route>
+				<Route path="/article/:slug" component={ArticleDetail}></Route>
+				<Route path="/editor/:slug" component={EditArticlePage}></Route>
+				<Route path="/editor" component={EditArticlePage}></Route>
 			</Switch>
 			<Footer />
 			<ToastContainer

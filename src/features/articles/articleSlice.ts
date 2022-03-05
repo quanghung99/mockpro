@@ -1,8 +1,9 @@
-import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
 import {
 	articleFilter,
 	articleModel,
+	articleParamCreate,
 	articlesResponse,
 	tagModel,
 } from 'models';
@@ -54,6 +55,11 @@ const articleSlice = createSlice({
 		deleteArticle(state, action: PayloadAction<string>) {},
 		favorArticle(state, action: PayloadAction<string>) {},
 		unFavorArticle(state, action: PayloadAction<string>) {},
+		addArticle: (state, action: PayloadAction<articleParamCreate>) => {},
+		updateArticle: (
+			state,
+			action: PayloadAction<{ formData: articleParamCreate; slug: string }>
+		) => {},
 	},
 });
 

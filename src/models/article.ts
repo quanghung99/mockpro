@@ -29,8 +29,8 @@ export interface articleList<T> {
 export interface articleParamCreate {
 	article: {
 		title: string;
-		description: string;
-		body: string;
+		description?: string;
+		body?: string;
 		tagList?: Array<string>;
 	};
 }
@@ -39,6 +39,7 @@ export interface articleParamUpdate {
 		title?: string;
 		description?: string;
 		body?: string;
+		tagList?: string[];
 	};
 }
 
@@ -48,4 +49,7 @@ export interface articleFilter {
 	favorited?: string;
 	limit?: number;
 	offset?: number;
+}
+export interface createResponse {
+	user: articleModel;
 }

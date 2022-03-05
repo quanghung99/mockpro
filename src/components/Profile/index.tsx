@@ -28,7 +28,7 @@ export default function ProfilePage() {
 	useEffect(() => {
 		dispatch(profileActions.fetchProfile(username));
 		dispatch(articleAction.getListArticle(filter));
-	}, [dispatch, filter]);
+	}, [dispatch, filter, location]);
 
 	const handleDeleteArticle = async (slug: string) => {
 		try {

@@ -33,6 +33,12 @@ const profileSlice = createSlice({
 		fetchProfileFailed(state, action) {
 			state.isLoading = false;
 		},
+		followProfile(state, action: PayloadAction<string>) {
+			state.isLoading = true;
+		},
+		unfollowProfile(state, action: PayloadAction<string>) {
+			state.isLoading = true;
+		},
 	},
 });
 

@@ -21,9 +21,12 @@ import {
 	Paper,
 	Typography,
 } from '@mui/material';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { profile } from 'console';
 import { articleModel, profileModel } from 'models';
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { profileActions } from '../profileSlice';
 import style from './style.module.scss';
 
 interface ProfileProps {
@@ -43,11 +46,21 @@ export default function Profile({
 }: ProfileProps) {
 	const navigate = useHistory();
 	const [open, setOpen] = useState<boolean>(false);
-
-	const handleClickOpen = () => setOpen(true);
+	const isLoading = useAppSelector((state) => state.profile.isLoading);
+	const dispatch = useAppDispatch();
+	const usernameAuth = useAppSelector(
+		(state) => state.auth.userState.user.username
+	);
 	const handleCloseSubmit = (slug: string) => {
 		setOpen(false);
 		handleDeleteArticle(slug);
+	};
+
+	const handleFollow = () => {
+		dispatch(profileActions.followProfile(profileCurrent.profile.username));
+	};
+	const handleUnFollow = () => {
+		dispatch(profileActions.unfollowProfile(profileCurrent.profile.username));
 	};
 	return (
 		<Box className={style.rootProfile}>
@@ -75,15 +88,32 @@ export default function Profile({
 									&nbsp; 3 march 2022
 								</span>
 							</Typography>
-							<Link to="/setting">
+							{profileCurrent.profile.username === usernameAuth ? (
+								<Link to="/setting">
+									<Button
+										className={style.settingButton}
+										variant="contained"
+										color="primary"
+									>
+										<SettingsIcon /> &nbsp; Edit Profile
+									</Button>
+								</Link>
+							) : (
 								<Button
 									className={style.settingButton}
 									variant="contained"
+									disabled={isLoading}
 									color="primary"
+									onClick={() => {
+										profileCurrent.profile.following
+											? handleUnFollow()
+											: handleFollow();
+									}}
 								>
-									<SettingsIcon /> &nbsp; Edit Profile
+									<SettingsIcon /> &nbsp;{' '}
+									{profileCurrent.profile.following ? 'Unfollow' : 'Follow'}
 								</Button>
-							</Link>
+							)}
 						</Box>
 					</Paper>
 				</Container>
@@ -129,7 +159,7 @@ export default function Profile({
 											src={profileCurrent.profile.image}
 										/>
 										<Box>
-											<Typography>quanghoapq1</Typography>
+											<Typography>{article.author.username}</Typography>
 											<Typography>{date.toDateString()}</Typography>
 										</Box>
 									</Box>

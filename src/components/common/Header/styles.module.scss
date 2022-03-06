@@ -144,3 +144,9 @@ hr {
 		}
 	}
 }
+.btnHover {
+	&:hover {
+		background-color: rgb(235, 236, 252);
+		border-radius: 10px;
+	}
+}

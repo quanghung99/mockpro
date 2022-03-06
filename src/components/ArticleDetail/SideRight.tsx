@@ -1,6 +1,8 @@
 import { Avatar, Box, Button, Container, Typography } from '@mui/material';
+import { useAppSelector } from 'app/hooks';
 import { RootState } from 'app/store';
 import { articleAction } from 'features/articles/articleSlice';
+import { profileActions } from 'features/profile/profileSlice';
 import { profileModel } from 'models';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,12 +15,19 @@ type Props = {
 export default function SideRight({ profile, slug }: Props) {
 	const navigate = useHistory();
 	const dispatch = useDispatch();
+	const isLoading = useAppSelector((state) => state.profile.isLoading);
 	const currentUser = useSelector(
 		(state: RootState) => state.auth.userState.user.username
 	);
 	const deleteArticle = () => {
 		dispatch(articleAction.deleteArticle(slug));
 		navigate.push('/blog');
+	};
+	const handleFollow = () => {
+		dispatch(profileActions.followProfile(profile.username));
+	};
+	const handleUnFollow = () => {
+		dispatch(profileActions.unfollowProfile(profile.username));
 	};
 	return (
 		<Box
@@ -100,9 +109,13 @@ export default function SideRight({ profile, slug }: Props) {
 						) : (
 							<Button
 								variant="contained"
+								disabled={isLoading}
 								sx={{
 									width: '100%',
 									marginTop: '28px',
+								}}
+								onClick={() => {
+									profile.following ? handleUnFollow() : handleFollow();
 								}}
 							>
 								{profile.following === false ? 'Follow' : 'Unfollow'}

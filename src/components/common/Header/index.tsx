@@ -173,12 +173,12 @@ const Header = () => {
 							) : (
 								<>
 									<li>
-										<Typography>
+										<Typography className={styles.btnHover}>
 											<NavLink to="/login">Sign In</NavLink>
 										</Typography>
 									</li>
 									<li>
-										<Typography>
+										<Typography className={styles.btnHover}>
 											<NavLink to="/register">Sign Up</NavLink>
 										</Typography>
 									</li>

@@ -122,9 +122,12 @@ export default function ArticleList({ articleList }: IArticleListProps) {
 									<Link to={`/article/${article.slug}`}>{article.body}</Link>
 								</p>
 								<Button
-									variant={
-										listFavorite[index].isFavorited ? 'contained' : 'text'
-									}
+									variant={'text'}
+									sx={{
+										color: listFavorite[index].isFavorited
+											? 'rgb(220,38,38)'
+											: 'black',
+									}}
 									onClick={() => {
 										listFavorite[index].isFavorited
 											? handleUnFavorite(article.slug, index)

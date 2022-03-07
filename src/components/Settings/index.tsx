@@ -1,11 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Container, Grid, Typography } from '@mui/material';
-import { updateUserData, userApi } from 'api';
+import { updateUserData } from 'api';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import InputField from 'components/common/CustomField/InputField';
 import TextAreaField from 'components/common/CustomField/TextAreaField';
 import { authAction } from 'features/auth/authSlice';
-import { userModel } from 'models';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';

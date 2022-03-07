@@ -16,6 +16,7 @@ export default function SideRight({ profile, slug }: Props) {
 	const navigate = useHistory();
 	const dispatch = useDispatch();
 	const isLoading = useAppSelector((state) => state.profile.isLoading);
+	const isLogged = useAppSelector((state) => state.auth.isLogged);
 	const currentUser = useSelector(
 		(state: RootState) => state.auth.userState.user.username
 	);
@@ -109,7 +110,7 @@ export default function SideRight({ profile, slug }: Props) {
 						) : (
 							<Button
 								variant="contained"
-								disabled={isLoading}
+								disabled={Boolean(!isLogged || isLoading)}
 								sx={{
 									width: '100%',
 									marginTop: '28px',

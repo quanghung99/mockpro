@@ -1,10 +1,10 @@
+import { Avatar, Box, Button, Grid, TextareaAutosize } from '@mui/material';
+import { commentActions } from 'features/comment/commentSlice';
+import { addCommentBody, profileModel } from 'models';
 import React from 'react';
-import { Avatar, Button, Grid, TextareaAutosize, Box } from '@mui/material';
-import styles from '../styles.module.scss';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { addCommentBody, commentModel, profileModel } from 'models';
-import { commentActions } from 'features/comment/commentSlice';
+import styles from '../styles.module.scss';
 type Props = {
 	profile: profileModel['profile'];
 	lastId: number | string | undefined;

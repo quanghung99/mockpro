@@ -1,23 +1,21 @@
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import {
 	Avatar,
-	Grid,
 	Box,
-	Typography,
 	Button,
+	Grid,
 	List,
 	ListItemButton,
 	Paper,
+	Typography,
 } from '@mui/material';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import hearIcon from '../icons/heart.png';
-import bubbleChat from '../icons/bubble-chat.png';
-import React, { useEffect, useState } from 'react';
-import styles from '../styles.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'app/store';
 import { commentActions } from 'features/comment/commentSlice';
 import { commentModel } from 'models';
-import { AnyArray } from 'immer/dist/internal';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import bubbleChat from '../icons/bubble-chat.png';
+import hearIcon from '../icons/heart.png';
+import styles from '../styles.module.scss';
 type Props = {
 	slug: string;
 	comments: commentModel[];

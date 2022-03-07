@@ -22,7 +22,6 @@ import {
 	Typography,
 } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { profile } from 'console';
 import { articleModel, profileModel } from 'models';
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
@@ -181,7 +180,11 @@ export default function Profile({
 												)}
 												&nbsp; {article.favoritesCount} &nbsp;Reactions
 											</Button>
-											<Button onClick={() => navigate.push(`/${article.slug}`)}>
+											<Button
+												onClick={() =>
+													navigate.push(`/article/${article.slug}`)
+												}
+											>
 												<AddCommentOutlined /> &nbsp; Add comments
 											</Button>
 										</Box>

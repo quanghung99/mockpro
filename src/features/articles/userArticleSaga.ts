@@ -14,7 +14,6 @@ function* addArticle(action: PayloadAction<articleParamCreate>) {
 		);
 		yield put(push('/blog'));
 		toast.success('Add article success!');
-		console.log('res', res);
 	} catch (err) {}
 }
 function* updateArticle(
@@ -33,7 +32,6 @@ function* updateArticle(
 	}
 }
 function* deleteArticle(action: PayloadAction<string>) {
-	console.log('formData nhan duoc trong saga', action.payload);
 	try {
 		let res: articleModel = yield call(
 			articlesApi.deleteArticle,

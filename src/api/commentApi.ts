@@ -8,7 +8,6 @@ export const commentApi = {
 	},
 	getCommentByArticle(slug: string): Promise<commentResponse> {
 		const url = `/articles/${slug}/comments`;
-		console.log('url', url);
 		return axiosCustom.get(url);
 	},
 	deleteComment(slug: string, id: string | number): Promise<commentResponse> {

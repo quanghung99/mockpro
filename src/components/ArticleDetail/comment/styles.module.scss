@@ -1,0 +1,32 @@
+.Options {
+	position: relative;
+}
+.Options:hover {
+	.OptionsList {
+		display: block;
+	}
+}
+.OptionsList {
+	display: none;
+	position: absolute;
+	right: 0;
+	top: 36px;
+	background-color: #f5f5f5;
+	border-radius: 16px;
+	padding: 4px;
+	background-color: white;
+	z-index: 100;
+}
+.OptionsList div {
+	text-align: left;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-weight: 400;
+	border-radius: 8px;
+	color: #404040;
+}
+.OptionsList div:hover {
+	color: royalblue;
+}
+.OptionsList div:first-child:hover {
+	color: red;
+}

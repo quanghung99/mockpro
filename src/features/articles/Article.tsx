@@ -41,7 +41,6 @@ const Article = () => {
 				offset: (page - 1) * 3,
 			};
 			dispatch(articleAction.getListArticle(newFilter));
-			console.log(tagValue);
 		} else if (tagValue === '1') {
 			const newFilter: articleFilter = {
 				limit: 3,

@@ -5,6 +5,8 @@ import * as React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styles from './styles.module.scss';
 import MarkdownIt from 'markdown-it';
+import { useSelector } from 'react-redux';
+import { RootState } from 'app/store';
 const md = MarkdownIt();
 export interface IArticleListProps {
 	articleList: articleModel[];
@@ -26,6 +28,7 @@ export default function ArticleList({ articleList }: IArticleListProps) {
 		getFavoriteList(articleList)
 	);
 	const navigate = useHistory();
+	const isLogged = useSelector((state: RootState) => state.auth.isLogged);
 
 	const handleClickFavorite = async (slug: string, index: number) => {
 		try {
@@ -118,7 +121,7 @@ export default function ArticleList({ articleList }: IArticleListProps) {
 									))}
 								</div>
 
-								<p className={styles.articleBody}>
+								<div className={styles.articleBody}>
 									<Link to={`/article/${article.slug}`}>
 										<div
 											dangerouslySetInnerHTML={{
@@ -126,22 +129,24 @@ export default function ArticleList({ articleList }: IArticleListProps) {
 											}}
 										/>
 									</Link>
-								</p>
-								<Button
-									variant={'text'}
-									sx={{
-										color: listFavorite[index].isFavorited
-											? 'rgb(220,38,38)'
-											: 'black',
-									}}
-									onClick={() => {
-										listFavorite[index].isFavorited
-											? handleUnFavorite(article.slug, index)
-											: handleClickFavorite(article.slug, index);
-									}}
-								>
-									❤ {listFavorite[index].favoriteCount}
-								</Button>
+								</div>
+								{isLogged ? (
+									<Button
+										variant={'text'}
+										sx={{
+											color: listFavorite[index].isFavorited
+												? 'rgb(220,38,38)'
+												: 'black',
+										}}
+										onClick={() => {
+											listFavorite[index].isFavorited
+												? handleUnFavorite(article.slug, index)
+												: handleClickFavorite(article.slug, index);
+										}}
+									>
+										❤ {listFavorite[index].favoriteCount}
+									</Button>
+								) : null}
 							</Box>
 						</Paper>
 					);

@@ -38,7 +38,6 @@ export default function ArticleDetail(props: RouterProps) {
 	const handleUnFavorite = () => {
 		dispatch(articleAction.unFavorArticle(article?.slug as string));
 	};
-	console.log('profile in articleDetail', profile);
 	if (article !== undefined) {
 		return (
 			<div className={styles.ArticleDetail}>
@@ -101,7 +100,7 @@ export default function ArticleDetail(props: RouterProps) {
 												},
 											};
 											return (
-												<Button size="small" className={styles.tag}>
+												<Button key={i} size="small" className={styles.tag}>
 													<span {...style}># </span>
 													{t}
 												</Button>
@@ -110,8 +109,7 @@ export default function ArticleDetail(props: RouterProps) {
 									</Box>
 									{/* Tags end */}
 									{/* Body start */}
-									<Typography
-										variant="body1"
+									<Box
 										sx={{
 											textIndent: '50px',
 											backgroundColor: '#fafafa',
@@ -128,7 +126,7 @@ export default function ArticleDetail(props: RouterProps) {
 												__html: md.render(article.body),
 											}}
 										/>
-									</Typography>
+									</Box>
 									{/* Body end */}
 								</Container>
 								{/* Comments */}
@@ -151,9 +149,3 @@ export default function ArticleDetail(props: RouterProps) {
 		);
 	} else return null;
 }
-
-/*
-var input = "Hey is some text some text?\r\n\r\nYou are some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text\r\n\r\nMy name is some text some text some text some text some text some text some text some text some text some text some text some text some text some text";
-var paragraphs = input.split(/(?:\r?\n)+/);
-console.log(paragraphs);
-*/

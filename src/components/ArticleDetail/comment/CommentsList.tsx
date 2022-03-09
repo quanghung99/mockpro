@@ -39,31 +39,12 @@ export default function CommentsList({ slug, comments }: Props) {
 					};
 				})
 			);
-			// return () => {
-			// 	console.log('element', document.querySelector('.CommentsList'));
-			// 	document.getElementsByClassName('CommentsList')[0].addEventListener(
-			// 		'click',
-			// 		() => {
-			// 			setShowOptionArr(
-			// 				comments.map((c) => {
-			// 					return {
-			// 						id: c.id as string,
-			// 						show: false,
-			// 					};
-			// 				})
-			// 			);
-			// 			console.log('da add event lisnter');
-			// 		},
-			// 		true
-			// 	);
-			// };
 		}
 	}, [comments.length]);
 
 	const currentUser = useSelector(
 		(state: RootState) => state.auth.userState.user.username
 	);
-	console.log('article detail', currentUser, comments);
 	const showOptions = (id: string) => {
 		let newShowOptionArr: showOption[] | undefined = showOptionsArr.filter(
 			(item: any) => {
@@ -181,9 +162,7 @@ export default function CommentsList({ slug, comments }: Props) {
 																color: '#333',
 															}}
 														></MoreHorizIcon>
-														{/* {(showOptionsArr as any).find((item: any) => {
-															return item.id === comment.id;
-														}).show ? ( */}
+
 														<Paper
 															className={styles.OptionsList}
 															sx={{
@@ -220,7 +199,6 @@ export default function CommentsList({ slug, comments }: Props) {
 																</ListItemButton>
 															</List>
 														</Paper>
-														{/* ) : null} */}
 													</Button>
 												</Box>
 												{/* options end */}
@@ -243,6 +221,7 @@ export default function CommentsList({ slug, comments }: Props) {
 												gap: '8px',
 												marginTop: '6px',
 												textAlign: 'left',
+												paddingBottom: '16px',
 											}}
 										>
 											<Button className={styles.like}>

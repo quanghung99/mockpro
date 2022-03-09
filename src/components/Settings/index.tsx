@@ -46,7 +46,6 @@ export default function Settings(props: ISettingsProps) {
 	});
 
 	const submitFormValue = (value: any) => {
-		console.log(value);
 		const submitValue: updateUserData = {
 			user: {
 				image: value.imgUrl,

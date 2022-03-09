@@ -82,7 +82,7 @@ export default function SideRight({ profile, slug }: Props) {
 						<Typography variant="body2" align="justify">
 							{profile.bio}
 						</Typography>
-						{profile.username === currentUser ? (
+						{profile.username === currentUser && isLogged ? (
 							<>
 								<Button
 									variant="contained"

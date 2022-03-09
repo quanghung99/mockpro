@@ -39,7 +39,6 @@ export function* handleSignUp(action: PayloadAction<signUpData>) {
 export function* handleGetUserProfile() {
 	try {
 		const token = localStorage.getItem('access_token');
-		console.log('Token:', token);
 		if (token) {
 			const res: userModel = yield call(userApi.getCurrentUser);
 			yield put(authAction.loginSuccess(res));

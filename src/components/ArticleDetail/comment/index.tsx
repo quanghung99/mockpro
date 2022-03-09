@@ -19,7 +19,6 @@ export default function Comments({ slug, profile }: Props) {
 	} else {
 		lastId = undefined;
 	}
-	console.log('profile in comment', profile);
 	useEffect(() => {
 		dispatch(commentActions.getListComment(slug));
 	}, []);

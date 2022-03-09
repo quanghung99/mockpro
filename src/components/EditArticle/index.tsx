@@ -39,7 +39,6 @@ export default function EditArticlePage(props: RouterProps) {
 	const [tagsCache, setTagsCache] = useState<Array<Tag>>([]);
 	const [donePrepare, setDonePrepare] = useState<boolean>(false);
 	const articles = useSelector((state: RootState) => state.article.articles);
-	console.log('articles', articles);
 	let dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(articleAction.getListArticle({}));
@@ -50,7 +49,6 @@ export default function EditArticlePage(props: RouterProps) {
 					return a.slug === slug;
 			  })
 			: null;
-	console.log('article', article);
 	const { register, handleSubmit, reset } = useForm<Inputs>({
 		defaultValues: {
 			title: '',
@@ -156,8 +154,7 @@ export default function EditArticlePage(props: RouterProps) {
 			}),
 		]);
 	};
-	console.log('startEdit', startEdit);
-	console.log('tagsCache', tagsCache.length === 0, tagsCache);
+
 	return (
 		<Box
 			className={styles.EditArticlePage}

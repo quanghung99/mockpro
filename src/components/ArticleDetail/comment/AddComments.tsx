@@ -18,7 +18,9 @@ export default function AddComments({ profile, lastId, slug }: Props) {
 	const dispatch = useDispatch();
 	const { register, reset, handleSubmit } = useForm<formModel>();
 	const isLogged = useSelector((state: RootState) => state.auth.isLogged);
-
+	const currentUser = useSelector(
+		(state: RootState) => state.auth.userState.user
+	);
 	const onSubmit = (data: formModel) => {
 		reset({
 			comment: '',
@@ -31,7 +33,6 @@ export default function AddComments({ profile, lastId, slug }: Props) {
 		dispatch(commentActions.addComment({ commentData, slug }));
 		dispatch(commentActions.getListComment(slug));
 	};
-	console.log('profile in comments', profile);
 	if (isLogged) {
 		return (
 			<Box className={styles.Comment}>
@@ -42,7 +43,7 @@ export default function AddComments({ profile, lastId, slug }: Props) {
 								marginTop: '16px',
 							}}
 							alt="Remy Sharp"
-							src={profile.image}
+							src={currentUser.image}
 						/>
 					</Grid>
 					<Grid item xs={11}>

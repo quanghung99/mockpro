@@ -4,7 +4,7 @@ import { profileModel } from 'models';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { profileActions } from './profileSlice';
 
-function* fetchProfile(action: PayloadAction<string>) {
+export function* fetchProfile(action: PayloadAction<string>) {
 	try {
 		const response: profileModel = yield call(
 			profilesApi.getProfiles,
@@ -16,7 +16,7 @@ function* fetchProfile(action: PayloadAction<string>) {
 		yield put(profileActions.fetchProfileFailed);
 	}
 }
-function* handleFollow(action: PayloadAction<string>) {
+export function* handleFollow(action: PayloadAction<string>) {
 	try {
 		const res: profileModel = yield call(
 			profilesApi.followUser,
@@ -28,7 +28,7 @@ function* handleFollow(action: PayloadAction<string>) {
 		yield put(profileActions.fetchProfileFailed);
 	}
 }
-function* handleUnFollow(action: PayloadAction<string>) {
+export function* handleUnFollow(action: PayloadAction<string>) {
 	try {
 		const res: profileModel = yield call(
 			profilesApi.unfollowUser,

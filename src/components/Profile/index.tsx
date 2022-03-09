@@ -40,7 +40,8 @@ export default function ProfilePage() {
 	};
 	const handleLoadFavorited = () => {
 		setFilter({
-			...filter,
+			limit: 10,
+			offset: 0,
 			favorited: username,
 		});
 	};

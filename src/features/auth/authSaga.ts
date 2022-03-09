@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { authAction } from './authSlice';
 
-function* hanleLogin(action: PayloadAction<loginData>) {
+export function* hanleLogin(action: PayloadAction<loginData>) {
 	try {
 		const res: userModel = yield call(authApi.login, action.payload);
 		yield put(authAction.loginSuccess(res));
@@ -19,7 +19,7 @@ function* hanleLogin(action: PayloadAction<loginData>) {
 		toast.error('Email or password incorrect');
 	}
 }
-function* handleSignUp(action: PayloadAction<signUpData>) {
+export function* handleSignUp(action: PayloadAction<signUpData>) {
 	try {
 		const res: userModel = yield call(authApi.signUp, action.payload);
 		yield put(authAction.loginSuccess(res));
@@ -36,7 +36,7 @@ function* handleSignUp(action: PayloadAction<signUpData>) {
 		}
 	}
 }
-function* handleGetUserProfile() {
+export function* handleGetUserProfile() {
 	try {
 		const token = localStorage.getItem('access_token');
 		console.log('Token:', token);
@@ -50,7 +50,9 @@ function* handleGetUserProfile() {
 		yield put(authAction.loginFaile());
 	}
 }
-function* handleChangeUserProfile(action: PayloadAction<updateUserData>) {
+export function* handleChangeUserProfile(
+	action: PayloadAction<updateUserData>
+) {
 	try {
 		const res: userModel = yield call(
 			userApi.updateCurrentUser,

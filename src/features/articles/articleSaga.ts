@@ -4,7 +4,7 @@ import { articleFilter, articlesResponse, tagModel } from 'models';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { articleAction } from './articleSlice';
 
-function* fetchAllArticle(action: PayloadAction<articleFilter>) {
+export function* fetchAllArticle(action: PayloadAction<articleFilter>) {
 	try {
 		const res: articlesResponse = yield call(
 			articlesApi.getListArticles,
@@ -13,7 +13,7 @@ function* fetchAllArticle(action: PayloadAction<articleFilter>) {
 		yield put(articleAction.setListArticle(res));
 	} catch (error) {}
 }
-function* fetchArticleByFilter(action: PayloadAction<articleFilter>) {
+export function* fetchArticleByFilter(action: PayloadAction<articleFilter>) {
 	try {
 		const res: articlesResponse = yield call(
 			articlesApi.getListArticles,
@@ -22,7 +22,7 @@ function* fetchArticleByFilter(action: PayloadAction<articleFilter>) {
 		yield put(articleAction.setListArticle(res));
 	} catch (error) {}
 }
-function* fetchAllUserFeed(action: PayloadAction<articleFilter>) {
+export function* fetchAllUserFeed(action: PayloadAction<articleFilter>) {
 	try {
 		const res: articlesResponse = yield call(
 			articlesApi.getFeedArticles,
@@ -31,22 +31,22 @@ function* fetchAllUserFeed(action: PayloadAction<articleFilter>) {
 		yield put(articleAction.setListArticle(res));
 	} catch (error) {}
 }
-function* fetchTag() {
+export function* fetchTag() {
 	try {
 		const res: tagModel = yield articlesApi.getTag();
 		yield put(articleAction.getTagSuccess(res));
 	} catch (error) {}
 }
 
-function* deleteArticle(action: PayloadAction<string>) {
+export function* deleteArticle(action: PayloadAction<string>) {
 	yield call(articlesApi.deleteArticle, action.payload);
 }
 
-function* favorArticle(action: PayloadAction<string>) {
+export function* favorArticle(action: PayloadAction<string>) {
 	yield call(articlesApi.favoriteArticle, action.payload);
 }
 
-function* unFavorArticle(action: PayloadAction<string>) {
+export function* unFavorArticle(action: PayloadAction<string>) {
 	yield call(articlesApi.unfavoriteArticle, action.payload);
 }
 
@@ -55,7 +55,7 @@ export default function* articleSaga() {
 	yield takeLatest(articleAction.getListFeed.type, fetchAllUserFeed);
 	yield takeLatest(articleAction.changeFilter.type, fetchArticleByFilter);
 	yield takeLatest(articleAction.getTag.type, fetchTag);
-	yield takeLatest(articleAction.deleteArticle, deleteArticle);
-	yield takeLatest(articleAction.favorArticle, favorArticle);
-	yield takeLatest(articleAction.unFavorArticle, unFavorArticle);
+	yield takeLatest(articleAction.deleteArticle.type, deleteArticle);
+	yield takeLatest(articleAction.favorArticle.type, favorArticle);
+	yield takeLatest(articleAction.unFavorArticle.type, unFavorArticle);
 }

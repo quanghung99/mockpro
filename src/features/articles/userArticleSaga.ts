@@ -12,6 +12,8 @@ function* addArticle(action: PayloadAction<articleParamCreate>) {
 			articlesApi.addArticle,
 			action.payload
 		);
+		yield put(push('/blog'));
+		toast.success('Add article success!');
 		console.log('res', res);
 	} catch (err) {}
 }

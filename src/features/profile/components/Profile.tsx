@@ -155,7 +155,7 @@ export default function Profile({
 									<Box className={style.userInfo}>
 										<Avatar
 											sx={{ width: '32px', height: '32px' }}
-											src={profileCurrent.profile.image}
+											src={article.author.image}
 										/>
 										<Box>
 											<Typography>{article.author.username}</Typography>
@@ -164,7 +164,7 @@ export default function Profile({
 									</Box>
 									<Box className={style.userArticle}>
 										<Link to="/" className={style.userArticle_title}>
-											{article.slug}
+											{article.title}
 										</Link>
 										<Link to="/tagList" className={style.userArticle_tagList}>
 											{article.tagList}

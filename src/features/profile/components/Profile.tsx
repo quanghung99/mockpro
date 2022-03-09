@@ -14,9 +14,6 @@ import {
 	Box,
 	Button,
 	Container,
-	Dialog,
-	DialogActions,
-	DialogTitle,
 	Grid,
 	Paper,
 	Typography,
@@ -44,14 +41,12 @@ export default function Profile({
 	handleDeleteArticle,
 }: ProfileProps) {
 	const navigate = useHistory();
-	const [open, setOpen] = useState<boolean>(false);
 	const isLoading = useAppSelector((state) => state.profile.isLoading);
 	const dispatch = useAppDispatch();
 	const usernameAuth = useAppSelector(
 		(state) => state.auth.userState.user.username
 	);
 	const handleCloseSubmit = (slug: string) => {
-		setOpen(false);
 		handleDeleteArticle(slug);
 	};
 
@@ -190,25 +185,9 @@ export default function Profile({
 										</Box>
 
 										<Box>
-											<Button onClick={() => setOpen(true)}>
+											<Button onClick={() => handleCloseSubmit(article.slug)}>
 												<DeleteOutlined /> &nbsp; Remove
 											</Button>
-											<Dialog open={open} onClose={() => setOpen(false)}>
-												<DialogTitle>
-													{'Are you sure you want to delete this article?'}
-												</DialogTitle>
-												<DialogActions>
-													<Button onClick={() => setOpen(false)}>
-														Disagree
-													</Button>
-													<Button
-														onClick={() => handleCloseSubmit(article.slug)}
-														autoFocus
-													>
-														Agree
-													</Button>
-												</DialogActions>
-											</Dialog>
 										</Box>
 									</Box>
 								</Paper>

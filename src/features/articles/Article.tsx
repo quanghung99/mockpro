@@ -6,8 +6,8 @@ import {
 	Stack,
 	Tab,
 	Tabs,
+	Box,
 } from '@mui/material';
-import { Box } from '@mui/system';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import ArticleFilter from 'components/Aritcle/ArticleFilter';
 import ArticleList from 'components/Aritcle/ArticleList';

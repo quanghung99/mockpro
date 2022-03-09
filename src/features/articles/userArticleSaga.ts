@@ -39,7 +39,7 @@ function* deleteArticle(action: PayloadAction<string>) {
 			articlesApi.deleteArticle,
 			action.payload
 		);
-		console.log('res delete', res);
+		toast.success('Delete success!');
 	} catch (err) {}
 }
 

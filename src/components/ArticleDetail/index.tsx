@@ -5,13 +5,13 @@ import { profileActions } from 'features/profile/profileSlice';
 import { articleModel } from 'models';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import MarkdownIt from 'markdown-it';
 import { RouterProps } from 'react-router-dom';
 import Comments from './comment';
 import SideLeft from './SideLeft';
 import SideRight from './SideRight';
 import styles from './styles.module.scss';
-
+const md = new MarkdownIt();
 const tagColor = ['#6b4040', '#b0eaff', '#ff5722', '#04aa6d'];
 export default function ArticleDetail(props: RouterProps) {
 	const articleList: Array<articleModel> = useSelector((state: RootState) => {
@@ -38,6 +38,7 @@ export default function ArticleDetail(props: RouterProps) {
 	const handleUnFavorite = () => {
 		dispatch(articleAction.unFavorArticle(article?.slug as string));
 	};
+	console.log('profile in articleDetail', profile);
 	if (article !== undefined) {
 		return (
 			<div className={styles.ArticleDetail}>
@@ -122,7 +123,11 @@ export default function ArticleDetail(props: RouterProps) {
 											fontFamily: 'Segoe UI Regular',
 										}}
 									>
-										{article.body}
+										<div
+											dangerouslySetInnerHTML={{
+												__html: md.render(article.body),
+											}}
+										/>
 									</Typography>
 									{/* Body end */}
 								</Container>

@@ -6,7 +6,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AddComments from './AddComments';
 import CommentsList from './CommentsList';
-
 type Props = { slug: string; profile: profileModel['profile'] };
 
 export default function Comments({ slug, profile }: Props) {
@@ -20,6 +19,7 @@ export default function Comments({ slug, profile }: Props) {
 	} else {
 		lastId = undefined;
 	}
+	console.log('profile in comment', profile);
 	useEffect(() => {
 		dispatch(commentActions.getListComment(slug));
 	}, []);
@@ -36,6 +36,7 @@ export default function Comments({ slug, profile }: Props) {
 					sx={{
 						display: 'flex',
 						justifyContent: 'space-between',
+						padding: '8px 0',
 					}}
 				>
 					<Typography

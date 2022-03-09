@@ -49,7 +49,7 @@ export default function Settings(props: ISettingsProps) {
 		console.log(value);
 		const submitValue: updateUserData = {
 			user: {
-				image: value.image,
+				image: value.imgUrl,
 				bio: value.bio,
 				username: value.username,
 				password: value.password,

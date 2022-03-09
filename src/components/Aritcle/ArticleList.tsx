@@ -5,7 +5,8 @@ import { articleModel } from 'models';
 import * as React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styles from './styles.module.scss';
-
+import MarkdownIt from 'markdown-it';
+const md = MarkdownIt();
 export interface IArticleListProps {
 	articleList: articleModel[];
 }
@@ -119,7 +120,13 @@ export default function ArticleList({ articleList }: IArticleListProps) {
 								</div>
 
 								<p className={styles.articleBody}>
-									<Link to={`/article/${article.slug}`}>{article.body}</Link>
+									<Link to={`/article/${article.slug}`}>
+										<div
+											dangerouslySetInnerHTML={{
+												__html: md.render(article.body),
+											}}
+										/>
+									</Link>
 								</p>
 								<Button
 									variant={'text'}

@@ -9,13 +9,15 @@ import {
 	Paper,
 	Typography,
 } from '@mui/material';
+import { RootState } from 'app/store';
 import { commentActions } from 'features/comment/commentSlice';
 import { commentModel } from 'models';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import bubbleChat from '../icons/bubble-chat.png';
 import hearIcon from '../icons/heart.png';
-import styles from '../styles.module.scss';
+import styles from './styles.module.scss';
+
 type Props = {
 	slug: string;
 	comments: commentModel[];
@@ -37,8 +39,31 @@ export default function CommentsList({ slug, comments }: Props) {
 					};
 				})
 			);
+			// return () => {
+			// 	console.log('element', document.querySelector('.CommentsList'));
+			// 	document.getElementsByClassName('CommentsList')[0].addEventListener(
+			// 		'click',
+			// 		() => {
+			// 			setShowOptionArr(
+			// 				comments.map((c) => {
+			// 					return {
+			// 						id: c.id as string,
+			// 						show: false,
+			// 					};
+			// 				})
+			// 			);
+			// 			console.log('da add event lisnter');
+			// 		},
+			// 		true
+			// 	);
+			// };
 		}
 	}, [comments.length]);
+
+	const currentUser = useSelector(
+		(state: RootState) => state.auth.userState.user.username
+	);
+	console.log('article detail', currentUser, comments);
 	const showOptions = (id: string) => {
 		let newShowOptionArr: showOption[] | undefined = showOptionsArr.filter(
 			(item: any) => {
@@ -63,7 +88,7 @@ export default function CommentsList({ slug, comments }: Props) {
 	};
 	if (comments.length > 0 && comments.length == showOptionsArr.length) {
 		return (
-			<>
+			<div className="CommentsList">
 				{comments.map((comment: commentModel) => {
 					let dateCreated = new Date((comment as any).createdAt).toDateString();
 					return (
@@ -148,6 +173,7 @@ export default function CommentsList({ slug, comments }: Props) {
 													}}
 												>
 													<Button
+														className={styles.Options}
 														onClick={() => showOptions(comment.id as string)}
 													>
 														<MoreHorizIcon
@@ -155,16 +181,17 @@ export default function CommentsList({ slug, comments }: Props) {
 																color: '#333',
 															}}
 														></MoreHorizIcon>
-														{(showOptionsArr as any).find((item: any) => {
+														{/* {(showOptionsArr as any).find((item: any) => {
 															return item.id === comment.id;
-														}).show ? (
-															<Paper
-																className={styles.option}
-																sx={{
-																	width: '200px',
-																}}
-															>
-																<List component="nav">
+														}).show ? ( */}
+														<Paper
+															className={styles.OptionsList}
+															sx={{
+																width: '200px',
+															}}
+														>
+															<List component="nav">
+																{currentUser === comment.author.username ? (
 																	<ListItemButton
 																		color="error"
 																		sx={{
@@ -176,23 +203,24 @@ export default function CommentsList({ slug, comments }: Props) {
 																	>
 																		Delete
 																	</ListItemButton>
-																	<ListItemButton
-																		sx={{
-																			color: '#404040',
-																		}}
-																	>
-																		Copy Link
-																	</ListItemButton>
-																	<ListItemButton
-																		sx={{
-																			color: '#404040',
-																		}}
-																	>
-																		Report abuse
-																	</ListItemButton>
-																</List>
-															</Paper>
-														) : null}
+																) : null}
+																<ListItemButton
+																	sx={{
+																		color: '#404040',
+																	}}
+																>
+																	Copy Link
+																</ListItemButton>
+																<ListItemButton
+																	sx={{
+																		color: '#404040',
+																	}}
+																>
+																	Report abuse
+																</ListItemButton>
+															</List>
+														</Paper>
+														{/* ) : null} */}
 													</Button>
 												</Box>
 												{/* options end */}
@@ -251,7 +279,7 @@ export default function CommentsList({ slug, comments }: Props) {
 						</div>
 					);
 				})}
-			</>
+			</div>
 		);
 	} else {
 		return <Box>There are still no comments</Box>;

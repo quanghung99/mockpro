@@ -55,7 +55,7 @@ function App() {
 				pauseOnHover
 			/>
 			<Backdrop
-				sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+				sx={{ color: '#fff', zIndex: (theme: any) => theme.zIndex.drawer + 1 }}
 				open={Boolean(isLoadingArticle || isLoggingAuth)}
 			>
 				<CircularProgress color="inherit" />

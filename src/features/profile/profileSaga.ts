@@ -10,6 +10,7 @@ export function* fetchProfile(action: PayloadAction<string>) {
 			profilesApi.getProfiles,
 			action.payload
 		);
+		console.log('res get profile', response);
 		yield put(profileActions.fetchProfileSuccess(response));
 	} catch (error) {
 		console.log(error);

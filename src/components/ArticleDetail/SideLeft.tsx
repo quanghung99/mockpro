@@ -2,7 +2,9 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import PermPhoneMsgIcon from '@mui/icons-material/PermPhoneMsg';
 import { Box, Button } from '@mui/material';
+import { RootState } from 'app/store';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import scrollEffect from './scrollEffect';
 
 interface Props {
@@ -43,6 +45,7 @@ export default function SideLeft({
 			favoriteCount: favoriteCounting.favoriteCount - 1,
 		});
 	};
+	const isLogged = useSelector((state: RootState) => state.auth.isLogged);
 	return (
 		<Box
 			className="sideLeft"
@@ -72,19 +75,23 @@ export default function SideLeft({
 						: handleClickFavorite();
 				}}
 			>
-				<Button
-					variant={favoriteCounting.isFavorited ? 'contained' : 'outlined'}
-					color="primary"
-					sx={{
-						boxSizing: 'border-box',
-						borderRadius: '16px',
-						border: 'none',
-						fontSize: '18px',
-					}}
-				>
-					❤
-				</Button>
-				<span>{favoriteCounting.favoriteCount}</span>
+				{isLogged === true ? (
+					<>
+						<Button
+							variant={favoriteCounting.isFavorited ? 'contained' : 'outlined'}
+							color="primary"
+							sx={{
+								boxSizing: 'border-box',
+								borderRadius: '16px',
+								border: 'none',
+								fontSize: '18px',
+							}}
+						>
+							❤
+						</Button>
+						<span>{favoriteCounting.favoriteCount}</span>
+					</>
+				) : null}
 			</Box>
 			<Box
 				sx={{

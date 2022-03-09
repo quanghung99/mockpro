@@ -93,7 +93,7 @@ export default function SignUpPage(props: SignUpPageProps) {
 
 					<Typography sx={{ mt: '20px' }}>
 						You have an account?{' '}
-						<Link style={{ textDecoration: 'none' }} to={'#'}>
+						<Link style={{ textDecoration: 'none' }} to="/login">
 							Sign In
 						</Link>
 					</Typography>

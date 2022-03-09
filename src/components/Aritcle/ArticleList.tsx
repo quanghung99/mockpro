@@ -1,5 +1,4 @@
-import { Avatar, Button, Chip, Paper, Typography } from '@mui/material';
-import { Box } from '@mui/system';
+import { Avatar, Button, Chip, Paper, Typography, Box } from '@mui/material';
 import { articlesApi } from 'api';
 import { articleModel } from 'models';
 import * as React from 'react';

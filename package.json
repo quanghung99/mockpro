@@ -15,7 +15,6 @@
 		"@testing-library/jest-dom": "^4.2.4",
 		"@testing-library/react": "^9.5.0",
 		"@testing-library/user-event": "^7.2.1",
-		"@types/jest": "^24.9.1",
 		"@types/node": "^12.20.46",
 		"@types/react": "^16.14.23",
 		"@types/react-dom": "^16.9.14",
@@ -61,6 +60,8 @@
 		]
 	},
 	"devDependencies": {
+		"@types/enzyme": "^3.10.11",
+		"@types/jest": "^27.4.1",
 		"@types/markdown-it": "^12.2.3",
 		"@types/react-router-dom": "^5.3.3",
 		"enzyme": "^3.11.0",

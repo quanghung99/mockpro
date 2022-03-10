@@ -114,7 +114,6 @@ export default function EditArticlePage(props: RouterProps) {
 					slug: slug,
 				})
 			);
-			dispatch(articleAction.getListArticle({}));
 		}
 	};
 	const handleTag = (e: any) => {

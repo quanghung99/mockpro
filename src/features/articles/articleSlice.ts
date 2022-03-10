@@ -55,11 +55,15 @@ const articleSlice = createSlice({
 		deleteArticle(state, action: PayloadAction<string>) {},
 		favorArticle(state, action: PayloadAction<string>) {},
 		unFavorArticle(state, action: PayloadAction<string>) {},
-		addArticle: (state, action: PayloadAction<articleParamCreate>) => {},
+		addArticle: (state, action: PayloadAction<articleParamCreate>) => {
+			state.isLoading = true;
+		},
 		updateArticle: (
 			state,
 			action: PayloadAction<{ formData: articleParamCreate; slug: string }>
-		) => {},
+		) => {
+			state.isLoading = true;
+		},
 	},
 });
 

@@ -14,7 +14,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { WithAuth } from 'utils/authGuard';
-import {} from 'utils/privateRoute';
+import { PrivateRoute } from 'utils/privateRoute';
 import './App.css';
 import Footer from './components/common/Footer';
 import Header from './components/common/Header';
@@ -40,8 +40,8 @@ function App() {
 				<Route component={WithAuth(LoginPage)} path="/login" />
 				<Route component={SignUpPage} path="/register" />
 				<Route path="/blog" component={Article} />
-				<Route path="/setting" component={Settings} />
-				<Route path="/profile" component={ProfilePage} />
+				<Route path="/setting" component={PrivateRoute(Settings)} />
+				<Route path="/profile" component={PrivateRoute(ProfilePage)} />
 				<Route path="/article/:slug" component={ArticleDetail}></Route>
 				<Route path="/editor/:slug" component={EditArticlePage}></Route>
 				<Route path="/editor" component={EditArticlePage}></Route>

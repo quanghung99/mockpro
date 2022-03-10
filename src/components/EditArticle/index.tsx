@@ -227,13 +227,14 @@ export default function EditArticlePage(props: RouterProps) {
 								>
 									Content Guidelines
 								</Typography>
-								<p
+								<ul
 									style={{
 										width: '100%',
 									}}
 								>
-									Just write what ever you want
-								</p>
+									<li>Use can use markdown to write</li>
+									<li>Just write what ever you want</li>
+								</ul>
 							</div>
 						) : null}
 					</Box>

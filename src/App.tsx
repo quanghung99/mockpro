@@ -25,13 +25,8 @@ function App() {
 	const dispatch = useAppDispatch();
 	useEffect(() => {
 		dispatch(authAction.getCurrentUser());
-		dispatch(articleAction.getListArticle({}));
 	}, [dispatch]);
-	// console.log(
-	// 	'Boolean(isLoadingArticle || isLoggingAuth)',
-	// 	isLoadingArticle,
-	// 	isLoggingAuth
-	// );
+
 	return (
 		<div className="App">
 			<Header />
@@ -41,7 +36,7 @@ function App() {
 				<Route component={SignUpPage} path="/register" />
 				<Route path="/blog" component={Article} />
 				<Route path="/setting" component={PrivateRoute(Settings)} />
-				<Route path="/profile" component={PrivateRoute(ProfilePage)} />
+				<Route path="/profile" component={ProfilePage} />
 				<Route path="/article/:slug" component={ArticleDetail}></Route>
 				<Route path="/editor/:slug" component={EditArticlePage}></Route>
 				<Route path="/editor" component={EditArticlePage}></Route>

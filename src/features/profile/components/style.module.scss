@@ -9,7 +9,10 @@
 			top: 0px;
 			width: 100%;
 			height: 20vh;
-			background-color: #000;
+			// background-color: #000;
+			background: url('https://static.vecteezy.com/system/resources/previews/001/991/212/non_2x/avatar-profile-pink-neon-icon-brick-wall-background-colour-neon-icon-vector.jpg');
+			background-position: top;
+			background-size: cover;
 		}
 		.headerProfile {
 			margin: auto;
@@ -104,6 +107,7 @@
 			background-color: #69696990;
 			font-size: 13px;
 			font-weight: 700;
+			margin-right: 16px;
 		}
 	}
 	.userActions {

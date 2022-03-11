@@ -161,9 +161,22 @@ export default function Profile({
 										<Link to="/" className={style.userArticle_title}>
 											{article.title}
 										</Link>
-										<Link to="/tagList" className={style.userArticle_tagList}>
-											{article.tagList}
-										</Link>
+										<div
+											style={{
+												display: 'flex',
+											}}
+										>
+											{article.tagList.map((t) => {
+												return (
+													<Link
+														to="/tagList"
+														className={style.userArticle_tagList}
+													>
+														{t}
+													</Link>
+												);
+											})}
+										</div>
 									</Box>
 									<Box className={style.userActions} mt={4}>
 										<Box>

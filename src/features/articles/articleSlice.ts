@@ -19,7 +19,7 @@ interface State {
 
 const initialState: State = {
 	articles: [],
-	isLoading: true,
+	isLoading: false,
 	error: '',
 	filter: {
 		limit: 0,

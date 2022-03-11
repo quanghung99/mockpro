@@ -59,7 +59,7 @@ export default function SignUpPage(props: SignUpPageProps) {
 			>
 				<Lock color={'primary'} fontSize={'large'} />
 				<Typography variant="h5" fontWeight={'700'}>
-					Sign In
+					Sign Up
 				</Typography>
 				<form onSubmit={handleSubmit(onsubmit)}>
 					<InputField
